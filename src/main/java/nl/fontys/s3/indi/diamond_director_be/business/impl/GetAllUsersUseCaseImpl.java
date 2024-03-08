@@ -28,6 +28,7 @@ public class GetAllUsersUseCaseImpl implements GetAllUsersUseCase {
                     .lastName(e.getLastName())
                     .id(e.getId())
                     .password(e.getPassword())
+                    .role(e.getRole())
                     .build());
         });
 
