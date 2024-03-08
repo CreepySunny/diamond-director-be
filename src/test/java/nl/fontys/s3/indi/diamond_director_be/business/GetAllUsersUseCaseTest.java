@@ -47,7 +47,7 @@ public class GetAllUsersUseCaseTest {
         assertNotNull(response);
         List<User> userList = response.getAllUsers();
         assertNotNull(userList);
-        assertEquals(2, userList.size()); // We added two fake users, so we expect two users in the response
+        assertEquals(2, userList.size());
 
         // Verify the details of each user in the response
         User user1 = userList.get(0);
