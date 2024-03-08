@@ -28,7 +28,7 @@ class GetUserUseCaseTest {
                         .role("Coach")
                         .build()
         );
-        
+
         Optional<User> result = getUserUseCase.getUser(userId);
 
         // Assertions
