@@ -1,4 +1,4 @@
-package nl.fontys.s3.indi.diamond_director_be.Controllers.logging;
+package nl.fontys.s3.indi.diamond_director_be.configuration.logging;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

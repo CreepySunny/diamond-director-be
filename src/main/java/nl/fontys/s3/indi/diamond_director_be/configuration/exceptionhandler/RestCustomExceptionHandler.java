@@ -1,4 +1,4 @@
-package nl.fontys.s3.indi.diamond_director_be.Controllers.exceptionhandler;
+package nl.fontys.s3.indi.diamond_director_be.configuration.exceptionhandler;
 
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
