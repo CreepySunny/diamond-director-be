@@ -1,3 +1,5 @@
+image: gradle:jdk17
+
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
@@ -7,6 +9,8 @@ workflow:
     - if: $CI_COMMIT_TAG
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
+before_script:
+  - chmod +x ./gradlew
 
 stages:
   - test
