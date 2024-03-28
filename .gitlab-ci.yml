@@ -18,9 +18,13 @@ stages:
 
 build:
   stage: build
+  tags:
+    - java
   script:
     - ./gradlew assemble
 test:
   stage: test
+  tags:
+    - java
   script:
     - ./gradlew test
