@@ -32,5 +32,7 @@ test:
 
 deploy:
   stage: deploy
+  tags:
+    - docker
   script:
     - docker build -t $DOCKER_USER_NAME/$DOCKER_IMAGE_NAME .
