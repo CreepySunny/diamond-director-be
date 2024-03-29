@@ -36,4 +36,5 @@ deploy:
   tags:
     - docker
   script:
+    - export DOCKER_HOST=tcp://$DOCKER_DEAMON_IP:2375
     - docker build -t $DOCKER_USER_NAME/$DOCKER_IMAGE_NAME .
