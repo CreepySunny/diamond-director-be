@@ -19,12 +19,12 @@ stages:
 build:
   stage: build
   tags:
-    - java
+    - docker
   script:
     - ./gradlew assemble
 test:
   stage: test
   tags:
-    - java
+    - docker
   script:
     - ./gradlew test
