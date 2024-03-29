@@ -12,6 +12,7 @@ workflow:
 stages:
   - test
   - build
+  - deploy
 
 
 build:
@@ -20,9 +21,16 @@ build:
     - docker
   script:
     - gradle assemble
+
+
 test:
   stage: test
   tags:
     - docker
   script:
     - gradle test
+
+deploy:
+  stage: deploy
+  script:
+    - docker build -t $DOCKER_USER_NAME/$DOCKER_IMAGE_NAME .
