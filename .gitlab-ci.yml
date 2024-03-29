@@ -16,6 +16,12 @@ stages:
   - test
   - build
 
+cache:
+  paths:
+    - ~/.gradle/caches/
+    - ~/.gradle/wrapper/
+
+
 build:
   stage: build
   tags:
