@@ -50,3 +50,11 @@ tasks.named('test') {
     forkEvery = 1
     useJUnitPlatform()
 }
+
+sonar {
+    properties {
+        property "sonar.projectKey", "Diamond-Director"
+        property "sonar.projectName", "Diamond Director"
+        property "sonar.qualitygate.wait", true
+    }
+}
