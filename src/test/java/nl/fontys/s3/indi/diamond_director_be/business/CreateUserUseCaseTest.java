@@ -29,8 +29,6 @@ public class CreateUserUseCaseTest {
         CreateUserRequest request = new CreateUserRequest("John", "Doe", "john@example.com", "password123", "user");
 
         UserEntity savedUser = UserEntity.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
                 .email(request.getEmail())
                 .role(request.getRole())
                 .password(request.getPassword())

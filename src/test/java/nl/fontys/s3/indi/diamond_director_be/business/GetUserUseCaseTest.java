@@ -29,8 +29,6 @@ class GetUserUseCaseTest {
         Long userId = 1L;
         UserEntity userEntity = UserEntity.builder()
                 .id(userId)
-                .firstName("John")
-                .lastName("Doe")
                 .email("john@example.com")
                 .password("password123")
                 .role("user")
@@ -43,8 +41,6 @@ class GetUserUseCaseTest {
 
         // Then
         assertEquals(userId, user.getId());
-        assertEquals("John", user.getFirstName());
-        assertEquals("Doe", user.getLastName());
         assertEquals("john@example.com", user.getEmail());
         assertEquals("password123", user.getPassword());
         assertEquals("user", user.getRole());
