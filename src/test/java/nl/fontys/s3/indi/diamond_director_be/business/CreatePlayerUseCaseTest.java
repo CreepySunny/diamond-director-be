@@ -13,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import static org.mockito.Mockito.*;
@@ -35,9 +37,11 @@ class CreatePlayerUseCaseTest {
         request.setHanded_bats("Right");
         request.setHanded_throws("Right");
         request.setPosition(Position.starter);
-        request.setDateOfBirth(new Date(90, 0, 1));
+        request.setDateOfBirth(LocalDate.of(1998, 1, 8));
         request.setHeight(180.0);
         request.setWeight(75.0);
+
+        Date date = Date.from(request.getDateOfBirth().atStartOfDay(ZoneId.systemDefault()).toInstant());
 
         PlayerEntity playerEntity = PlayerEntity.builder()
                 .firstName(request.getFirstName())
@@ -45,7 +49,7 @@ class CreatePlayerUseCaseTest {
                 .handed_bats(request.getHanded_bats())
                 .handed_throws(request.getHanded_throws())
                 .position(request.getPosition())
-                .dateOfBirth(request.getDateOfBirth())
+                .dateOfBirth(date)
                 .height(request.getHeight())
                 .weight(request.getWeight())
                 .id(1L) // Assuming the player ID will be set after saving
