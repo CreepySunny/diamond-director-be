@@ -3,30 +3,51 @@ package nl.fontys.s3.indi.diamond_director_be.business;
 import nl.fontys.s3.indi.diamond_director_be.business.impl.CreateUserUseCaseImpl;
 import nl.fontys.s3.indi.diamond_director_be.domain.CreateUserRequest;
 import nl.fontys.s3.indi.diamond_director_be.domain.CreateUserResponce;
+import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.UserEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.UserRepository;
-import nl.fontys.s3.indi.diamond_director_be.persistance.impl.FakeUserRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-class CreateUserUseCaseTest {
+@ExtendWith(MockitoExtension.class)
+public class CreateUserUseCaseTest {
+
+    @Mock
+    private UserRepository userRepository;
+
+    @InjectMocks
+    private CreateUserUseCaseImpl createUserUseCase;
 
     @Test
-    public void testCreateUser() {
-        // Create useCase and Implementation
-        // Create useCase Dependency
-        UserRepository userRepository = new FakeUserRepository();
-        CreateUserUseCase createUserUseCase = new CreateUserUseCaseImpl(userRepository);
-
-        // Prepare test data
+    void testCreateUser() {
+        // Given
         CreateUserRequest request = new CreateUserRequest("John", "Doe", "john@example.com", "password123", "user");
 
-        // Call Create USer
+        UserEntity savedUser = UserEntity.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .email(request.getEmail())
+                .role(request.getRole())
+                .password(request.getPassword())
+                .id(1L) // Assuming the user ID will be set after saving
+                .build();
+
+        when(userRepository.save(any(UserEntity.class))).thenReturn(savedUser);
+
+        // When
         CreateUserResponce response = createUserUseCase.CreateUser(request);
 
-        // Assertions
+        // Then
         assertNotNull(response);
         assertNotNull(response.getUserId());
-        assertTrue(response.getUserId() > 0); // Assuming user ID is generated and greater than 0
+        assertEquals(1L, response.getUserId()); // Assuming user ID is generated and equals 1
+
+        // Verify that userRepository.save() is called once with any UserEntity object
+        verify(userRepository, times(1)).save(any(UserEntity.class));
     }
 }
