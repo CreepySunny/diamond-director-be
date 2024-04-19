@@ -10,8 +10,6 @@ final class UserConverter {
         return User.builder()
                 .password(userEntity.getPassword())
                 .id(userEntity.getId())
-                .lastName(userEntity.getLastName())
-                .firstName(userEntity.getFirstName())
                 .email(userEntity.getEmail())
                 .role(userEntity.getRole())
                 .build();

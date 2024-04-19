@@ -12,11 +12,10 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class CreateUserUseCaseImpl implements CreateUserUseCase {
     private UserRepository userRepository;
+
     @Override
     public CreateUserResponce CreateUser(CreateUserRequest request) {
-        UserEntity savedUser= userRepository.createUser(UserEntity.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
+        UserEntity savedUser= userRepository.save(UserEntity.builder()
                 .email(request.getEmail())
                 .role(request.getRole())
                 .password(request.getPassword())
