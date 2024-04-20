@@ -37,10 +37,6 @@ public class UserController {
 
     @GetMapping("{id}")
     public ResponseEntity<User> getUser(@PathVariable(value = "id")final Long id){
-        Optional<User> retrievedUser = getUserUseCase.getUser(id);
-        if (retrievedUser.isPresent()){
-            return ResponseEntity.ok(retrievedUser.get());
-        }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.ok(getUserUseCase.getUser(id));
     }
 }

@@ -12,6 +12,14 @@ java {
     sourceCompatibility = '17'
 }
 
+sonar {
+    properties {
+        property "sonar.projectKey", "Diamond-Director"
+        property "sonar.projectName", "Diamond Director"
+        property "sonar.qualitygate.wait", true
+    }
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -25,10 +33,17 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.flywaydb:flyway-mysql'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    testImplementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:4.0.4'
+    testImplementation 'com.playtika.testcontainers:embedded-mysql:3.0.0-RC9'
 }
 
 tasks.named('test') {

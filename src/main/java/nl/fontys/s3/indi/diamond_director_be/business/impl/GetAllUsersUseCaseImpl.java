@@ -24,8 +24,6 @@ public class GetAllUsersUseCaseImpl implements GetAllUsersUseCase {
         userRepository.findAll().forEach(e -> {
             userList.add(User.builder()
                     .email(e.getEmail())
-                    .firstName(e.getFirstName())
-                    .lastName(e.getLastName())
                     .id(e.getId())
                     .password(e.getPassword())
                     .role(e.getRole())
