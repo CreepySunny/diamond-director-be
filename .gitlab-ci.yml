@@ -52,7 +52,7 @@ sonarqube-check:
     key: "${CI_JOB_NAME}"
     paths:
       - .sonar/cache
-  script: gradle jacocoTestReport sonarqube -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.qualitygate.wait=true -Dsonar.java.coveragePlugin=jacoco
+  script: gradle jacocoTestReport sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.qualitygate.wait=true -Dsonar.java.coveragePlugin=jacoco -Dsonar.token=$SONAR_TOKEN
   allow_failure: true
   rules:
     - if: $CI_COMMIT_REF_NAME == 'main' || $CI_PIPELINE_SOURCE == 'merge_request_event'
