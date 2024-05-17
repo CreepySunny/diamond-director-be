@@ -37,7 +37,7 @@ deploy:
   tags:
     - docker
   script:
-    - echo $DOCKER_HUB_ACCESS | docker login -u $DOCKER_USER_NAME --password-stdin
+    - echo $DOCKER_HUB_ACCESS | docker login --username $DOCKER_USER_NAME --password-stdin
     - docker build -t $DOCKER_USER_NAME/$DOCKER_IMAGE_NAME .
     - docker push $DOCKER_USER_NAME/$DOCKER_IMAGE_NAME:latest
 
