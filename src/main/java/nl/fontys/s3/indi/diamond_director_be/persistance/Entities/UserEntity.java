@@ -2,10 +2,8 @@ package nl.fontys.s3.indi.diamond_director_be.persistance.Entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import nl.fontys.s3.indi.diamond_director_be.domain.Enums.UserRoles;
 import org.hibernate.validator.constraints.Length;
 
 @Table(name = "user_account")
@@ -27,10 +25,17 @@ public class UserEntity {
     @NotBlank
     @Length(min = 2, max = 255)
     @Column(name = "password")
+    @ToString.Exclude
     private String password;
 
-    @NotBlank
     @Length(min = 2, max = 50)
     @Column(name = "role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserRoles role;
+
+    @OneToOne(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private CoachEntity coachEntity;
+
+    @OneToOne(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private PlayerEntity playerEntity;
 }

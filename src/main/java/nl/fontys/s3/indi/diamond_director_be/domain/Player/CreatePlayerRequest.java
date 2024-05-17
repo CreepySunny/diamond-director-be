@@ -1,14 +1,11 @@
-package nl.fontys.s3.indi.diamond_director_be.domain;
+package nl.fontys.s3.indi.diamond_director_be.domain.Player;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import nl.fontys.s3.indi.diamond_director_be.domain.Enums.Position;
-import org.hibernate.validator.constraints.Length;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.CreateUserRequest;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @SuperBuilder
@@ -16,16 +13,14 @@ import java.util.Date;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class CreatePlayerRequest extends CreateUserRequest {
-    @NotBlank
-    @Length(min = 2, max = 50)
-    private String handed_bats;
-
-    @NotBlank
-    @Length(min = 2, max = 50)
-    private String handed_throws;
+    @NotNull
+    private PlayerHanded handed_bats;
 
     @NotNull
-    private Position position;
+    private PlayerHanded handed_throws;
+
+    @NotNull
+    private PlayerPosition position;
     @NotNull
     private LocalDate dateOfBirth;
     @NotNull

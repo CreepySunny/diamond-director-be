@@ -1,6 +1,6 @@
-package nl.fontys.s3.indi.diamond_director_be.domain.Enums;
+package nl.fontys.s3.indi.diamond_director_be.domain.Player;
 
-public enum Position {
+public enum PlayerPosition {
     first,
     second,
     third,

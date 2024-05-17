@@ -2,15 +2,15 @@ package nl.fontys.s3.indi.diamond_director_be.persistance.Entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import nl.fontys.s3.indi.diamond_director_be.domain.Enums.Position;
+import nl.fontys.s3.indi.diamond_director_be.domain.Player.PlayerHanded;
+import nl.fontys.s3.indi.diamond_director_be.domain.Player.PlayerPosition;
 import org.hibernate.validator.constraints.Length;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Table(name = "player")
 @Builder @AllArgsConstructor @NoArgsConstructor @Entity @Data
@@ -22,37 +22,36 @@ public class PlayerEntity {
 
     @NotBlank
     @Length(min = 2, max = 255)
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
 
     @NotBlank
-    @Length(min = 2, max = 244)
-    @Column(name = "lastName")
+    @Length(min = 2, max = 255)
+    @Column(name = "last_name")
     private String lastName;
 
-    @NotBlank
-    @Length(min = 2, max = 50)
-    @Column(name = "handedBats")
-    private String handed_bats;
+    @Column(name = "handed_bats")
+    @Enumerated(EnumType.STRING)
+    private PlayerHanded handedBats;
 
-    @NotBlank
-    @Length(min = 2, max = 50)
-    @Column(name = "handedThrows")
-    private String handed_throws;
+    @Column(name = "handed_throws")
+    @Enumerated(EnumType.STRING)
+    private PlayerHanded handedThrows;
 
-    @NotNull
     @Column(name = "position")
-    private Position position;
+    @Enumerated(EnumType.STRING)
+    private PlayerPosition position;
 
-    @NotNull
     @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
-    @NotNull
     @Column(name = "height")
     private Double height;
 
-    @NotNull
     @Column(name = "weight")
     private Double weight;
+
+    @OneToOne
+    @JoinColumn(name = "user_entity_id")
+    private UserEntity userEntity;
 }

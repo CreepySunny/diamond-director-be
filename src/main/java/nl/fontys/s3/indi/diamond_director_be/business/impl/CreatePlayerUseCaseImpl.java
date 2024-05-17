@@ -3,38 +3,57 @@ package nl.fontys.s3.indi.diamond_director_be.business.impl;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.business.CreatePlayerUseCase;
-import nl.fontys.s3.indi.diamond_director_be.domain.CreatePlayerRequest;
-import nl.fontys.s3.indi.diamond_director_be.domain.CreatePlayerResponse;
+import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.DUP_EMAIL_EXCEPTION;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.CreateUserResponse;
+import nl.fontys.s3.indi.diamond_director_be.domain.Player.CreatePlayerRequest;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.PlayerEntity;
+import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.UserEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.PlayerRepository;
+import nl.fontys.s3.indi.diamond_director_be.persistance.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.ZoneId;
-import java.util.Date;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class CreatePlayerUseCaseImpl implements CreatePlayerUseCase {
+    private final UserRepository userRepository;
     private PlayerRepository playerRepository;
+    private final PasswordEncoder passwordEncoder;
     @Override
     @Transactional
-    public CreatePlayerResponse create(CreatePlayerRequest request) {
+    public CreateUserResponse create(CreatePlayerRequest request) {
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
 
-        Date date = Date.from(request.getDateOfBirth().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        UserEntity userEntityToSave = UserEntity
+                .builder()
+                .email(request.getEmail())
+                .password(encodedPassword)
+                .role(request.getRole())
+                .build();
+
+
 
         PlayerEntity savedPlayer = playerRepository.save(PlayerEntity.builder()
+                        .userEntity(userEntityToSave)
                         .firstName(request.getFirstName())
                         .lastName(request.getLastName())
-                        .handed_bats(request.getHanded_bats())
-                        .dateOfBirth(date)
-                        .handed_throws(request.getHanded_throws())
+                        .handedBats(request.getHanded_bats())
+                        .dateOfBirth(request.getDateOfBirth())
+                        .handedThrows(request.getHanded_throws())
                         .position(request.getPosition())
                         .height(request.getHeight())
                         .weight(request.getWeight())
                 .build());
 
-        return CreatePlayerResponse.builder()
-                .id(savedPlayer.getId())
-                .build();
+        return CreateUserResponse.builder().userId(savedPlayer.getUserEntity().getId()).build();
+    }
+
+    private PlayerEntity savedToPersistence(PlayerEntity playerEntityToSave){
+        Optional<UserEntity> optionalUser = userRepository.findByEmail(playerEntityToSave.getUserEntity().getEmail());
+        optionalUser.orElseThrow(DUP_EMAIL_EXCEPTION::new);
+
+        return playerRepository.save(playerEntityToSave);
     }
 }

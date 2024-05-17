@@ -1,0 +1,7 @@
+ALTER TABLE coaches
+    ADD COLUMN coach_position VARCHAR(255) NOT NULL,
+    ADD COLUMN scorekeeper_perm TINYINT(1) NOT NULL;
+
+ALTER TABLE coaches
+    MODIFY COLUMN scorekeeper_perm TINYINT(1) NOT NULL DEFAULT 0;
+    MODIFY COLUMN coach_position VARCHAR(255) NOT NULL DEFAULT 'OFFENSE',
