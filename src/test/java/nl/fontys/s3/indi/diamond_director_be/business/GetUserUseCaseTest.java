@@ -1,7 +1,8 @@
 package nl.fontys.s3.indi.diamond_director_be.business;
 
 import nl.fontys.s3.indi.diamond_director_be.business.impl.GetUserUseCaseImpl;
-import nl.fontys.s3.indi.diamond_director_be.domain.User;
+import nl.fontys.s3.indi.diamond_director_be.domain.Enums.UserRoles;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.User;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.UserEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ class GetUserUseCaseTest {
                 .id(userId)
                 .email("john@example.com")
                 .password("password123")
-                .role("user")
+                .role(UserRoles.ADMIN)
                 .build();
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
@@ -43,7 +44,7 @@ class GetUserUseCaseTest {
         assertEquals(userId, user.getId());
         assertEquals("john@example.com", user.getEmail());
         assertEquals("password123", user.getPassword());
-        assertEquals("user", user.getRole());
+        assertEquals(UserRoles.ADMIN, user.getRole());
     }
 
     @Test

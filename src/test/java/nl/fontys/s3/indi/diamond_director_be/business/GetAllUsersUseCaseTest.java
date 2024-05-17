@@ -1,6 +1,7 @@
 package nl.fontys.s3.indi.diamond_director_be.business;
 
 import nl.fontys.s3.indi.diamond_director_be.business.impl.GetAllUsersUseCaseImpl;
+import nl.fontys.s3.indi.diamond_director_be.domain.Enums.UserRoles;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.UserEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import nl.fontys.s3.indi.diamond_director_be.domain.GetAllUsersResponce;
-import nl.fontys.s3.indi.diamond_director_be.domain.User;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.User;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -33,13 +34,13 @@ public class GetAllUsersUseCaseTest {
                 .id(1L)
                 .email("john@example.com")
                 .password("password123")
-                .role("user")
+                .role(UserRoles.ADMIN)
                 .build());
         userEntities.add(UserEntity.builder()
                 .id(2L)
                 .email("jane@example.com")
                 .password("password456")
-                .role("admin")
+                .role(UserRoles.ADMIN)
                 .build());
 
         when(userRepository.findAll()).thenReturn(userEntities);
