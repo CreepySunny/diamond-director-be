@@ -5,15 +5,13 @@ import lombok.AllArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.business.CreateUserUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.GetAllUsersUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.GetUserUseCase;
-import nl.fontys.s3.indi.diamond_director_be.domain.CreateUserRequest;
-import nl.fontys.s3.indi.diamond_director_be.domain.CreateUserResponce;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.CreateUserRequest;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.CreateUserResponse;
 import nl.fontys.s3.indi.diamond_director_be.domain.GetAllUsersResponce;
-import nl.fontys.s3.indi.diamond_director_be.domain.User;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -25,8 +23,8 @@ public class UserController {
     private GetUserUseCase getUserUseCase;
 
     @PostMapping()
-    public ResponseEntity<CreateUserResponce> createUser(@RequestBody @Valid CreateUserRequest request){
-        CreateUserResponce responce = createUserUseCase.CreateUser(request);
+    public ResponseEntity<CreateUserResponse> createUser(@RequestBody @Valid CreateUserRequest request){
+        CreateUserResponse responce = createUserUseCase.CreateUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(responce);
     }
 

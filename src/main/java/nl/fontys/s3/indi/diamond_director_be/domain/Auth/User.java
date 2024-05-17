@@ -1,7 +1,6 @@
-package nl.fontys.s3.indi.diamond_director_be.domain;
+package nl.fontys.s3.indi.diamond_director_be.domain.Auth;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

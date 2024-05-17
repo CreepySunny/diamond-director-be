@@ -1,10 +1,8 @@
-package nl.fontys.s3.indi.diamond_director_be.domain;
+package nl.fontys.s3.indi.diamond_director_be.domain.Auth;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
