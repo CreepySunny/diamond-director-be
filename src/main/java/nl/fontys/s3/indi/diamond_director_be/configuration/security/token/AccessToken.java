@@ -9,7 +9,7 @@ public interface AccessToken {
 
     Long getUserId();
 
-    Set<UserRoles> getRoles();
+    Set<UserRoles> getUserRole();
 
     boolean hasRole(UserRoles roleName);
 }

@@ -50,6 +50,6 @@ public class UserLogInUseCaseImpl implements UserLogInUseCase {
         UserRoles role = user.getRole();
 
         return accessTokenEncoder.encode(
-                new AccessTokenImpl(user.getEmail(), user.getId(), Set.of(role)));
+                new AccessTokenImpl(user.getEmail(), user.getId(), role));
     }
 }

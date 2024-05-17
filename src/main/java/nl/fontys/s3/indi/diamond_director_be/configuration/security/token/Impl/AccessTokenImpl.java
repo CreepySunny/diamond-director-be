@@ -16,17 +16,17 @@ public class AccessTokenImpl implements AccessToken{
 
         private final String subject;
         private final Long userId;
-        private final Set<UserRoles> roles;
+        private final UserRoles userRole;
 
-        public AccessTokenImpl(String subject, Long userId, Collection<UserRoles> roles) {
+        public AccessTokenImpl(String subject, Long userId, UserRoles role) {
             this.subject = subject;
             this.userId = userId;
-            this.roles = roles != null ? Set.copyOf(roles) : Collections.emptySet();
+            this.userRole = role != null ? role : UserRoles.SCOREKEEPER;
         }
 
         @Override
         public boolean hasRole(UserRoles roleName) {
-            return this.roles.contains(roleName);
+            return roleName == userRole;
         }
     }
 
