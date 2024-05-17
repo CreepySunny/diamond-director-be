@@ -54,8 +54,15 @@ dependencies {
 }
 
 tasks.named('test') {
-    forkEvery = 1
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    reports {
+        xml.required.set(true)
+    }
+    dependsOn test
 }
 
 sonar {
