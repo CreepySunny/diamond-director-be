@@ -4,16 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import nl.fontys.s3.indi.diamond_director_be.domain.Enums.UserRoles;
 
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
     private Long id;
-    private String firstName;
-    private String lastName;
     private String email;
     private String password;
-    private String role;
+    private UserRoles role;
 }
