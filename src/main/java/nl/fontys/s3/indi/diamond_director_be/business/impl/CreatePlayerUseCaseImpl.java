@@ -33,10 +33,10 @@ public class CreatePlayerUseCaseImpl implements CreatePlayerUseCase {
                 .role(request.getRole())
                 .build();
 
-
+        UserEntity userEntity = userRepository.save(userEntityToSave);
 
         PlayerEntity savedPlayer = playerRepository.save(PlayerEntity.builder()
-                        .userEntity(userEntityToSave)
+                        .userEntity(userEntity)
                         .firstName(request.getFirstName())
                         .lastName(request.getLastName())
                         .handedBats(request.getHanded_bats())

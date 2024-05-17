@@ -28,7 +28,6 @@ public class UserEntity {
     @ToString.Exclude
     private String password;
 
-    @Length(min = 2, max = 50)
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private UserRoles role;
