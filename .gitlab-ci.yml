@@ -53,6 +53,7 @@ sonarqube-check:
     paths:
       - .sonar/cache
   script:
+    - gradle clean
     - gradle jacocoTestReport
     - gradle  sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.qualitygate.wait=true -Dsonar.java.coveragePlugin=jacoco -Dsonar.token=$SONAR_TOKEN
   allow_failure: true
