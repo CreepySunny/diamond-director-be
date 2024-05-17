@@ -52,9 +52,9 @@ sonarqube-check:
     key: "${CI_JOB_NAME}"
     paths:
       - .sonar/cache
-  script:
-    - gradle clean
+  before_script:
     - gradle jacocoTestReport
+  script:
     - gradle  sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.qualitygate.wait=true -Dsonar.java.coveragePlugin=jacoco -Dsonar.token=$SONAR_TOKEN
   allow_failure: true
   rules:
