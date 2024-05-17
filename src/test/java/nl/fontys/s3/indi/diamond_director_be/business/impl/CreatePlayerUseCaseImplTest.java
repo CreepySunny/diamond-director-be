@@ -8,6 +8,7 @@ import nl.fontys.s3.indi.diamond_director_be.domain.Player.PlayerPosition;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.PlayerEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.UserEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.PlayerRepository;
+import nl.fontys.s3.indi.diamond_director_be.persistance.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,6 +17,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -24,6 +26,9 @@ public class CreatePlayerUseCaseImplTest {
 
         @Mock
         private PlayerRepository playerRepository;
+
+        @Mock
+        private UserRepository userRepository;
 
         @Mock
         private PasswordEncoder passwordEncoder;
@@ -77,7 +82,8 @@ public class CreatePlayerUseCaseImplTest {
                     .build();
 
             when(playerRepository.save(any(PlayerEntity.class))).thenReturn(playerEntityToSave);
-
+            when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(userEntityToSave));
+            when(userRepository.save(any(UserEntity.class))).thenReturn(userEntityToSave);
             CreateUserResponse response = createPlayerUseCase.create(request);
 
             assertEquals(playerEntityToSave.getUserEntity().getId(), response.getUserId());

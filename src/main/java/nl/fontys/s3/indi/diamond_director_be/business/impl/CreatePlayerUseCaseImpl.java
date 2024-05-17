@@ -19,7 +19,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class CreatePlayerUseCaseImpl implements CreatePlayerUseCase {
     private final UserRepository userRepository;
-    private PlayerRepository playerRepository;
+    private final PlayerRepository playerRepository;
     private final PasswordEncoder passwordEncoder;
     @Override
     @Transactional
@@ -35,7 +35,7 @@ public class CreatePlayerUseCaseImpl implements CreatePlayerUseCase {
 
         UserEntity userEntity = userRepository.save(userEntityToSave);
 
-        PlayerEntity savedPlayer = playerRepository.save(PlayerEntity.builder()
+        PlayerEntity savedPlayer = PlayerEntity.builder()
                         .userEntity(userEntity)
                         .firstName(request.getFirstName())
                         .lastName(request.getLastName())
@@ -45,12 +45,14 @@ public class CreatePlayerUseCaseImpl implements CreatePlayerUseCase {
                         .position(request.getPosition())
                         .height(request.getHeight())
                         .weight(request.getWeight())
-                .build());
+                .build();
+
+        savedPlayer = savePlayer(savedPlayer);
 
         return CreateUserResponse.builder().userId(savedPlayer.getUserEntity().getId()).build();
     }
 
-    private PlayerEntity savedToPersistence(PlayerEntity playerEntityToSave){
+    private PlayerEntity savePlayer(PlayerEntity playerEntityToSave){
         Optional<UserEntity> optionalUser = userRepository.findByEmail(playerEntityToSave.getUserEntity().getEmail());
         optionalUser.orElseThrow(DUP_EMAIL_EXCEPTION::new);
 
