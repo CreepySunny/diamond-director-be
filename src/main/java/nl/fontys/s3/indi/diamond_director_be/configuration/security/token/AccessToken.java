@@ -1,8 +1,6 @@
 package nl.fontys.s3.indi.diamond_director_be.configuration.security.token;
 
-import nl.fontys.s3.indi.diamond_director_be.domain.Enums.UserRoles;
-
-import java.util.Set;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.UserRoles;
 
 public interface AccessToken {
     String getSubject();

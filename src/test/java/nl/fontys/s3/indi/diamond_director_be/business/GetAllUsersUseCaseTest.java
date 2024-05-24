@@ -1,7 +1,7 @@
 package nl.fontys.s3.indi.diamond_director_be.business;
 
 import nl.fontys.s3.indi.diamond_director_be.business.impl.GetAllUsersUseCaseImpl;
-import nl.fontys.s3.indi.diamond_director_be.domain.Enums.UserRoles;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.UserRoles;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.UserEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.UserRepository;
 import org.junit.jupiter.api.Test;

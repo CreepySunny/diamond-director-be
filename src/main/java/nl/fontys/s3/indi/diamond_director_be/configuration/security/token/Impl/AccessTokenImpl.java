@@ -3,12 +3,7 @@ package nl.fontys.s3.indi.diamond_director_be.configuration.security.token.Impl;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import nl.fontys.s3.indi.diamond_director_be.configuration.security.token.AccessToken;
-import nl.fontys.s3.indi.diamond_director_be.domain.Auth.User;
-import nl.fontys.s3.indi.diamond_director_be.domain.Enums.UserRoles;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Set;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.UserRoles;
 
 @EqualsAndHashCode
 @Getter

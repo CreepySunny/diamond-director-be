@@ -8,15 +8,13 @@ import nl.fontys.s3.indi.diamond_director_be.configuration.security.token.Access
 import nl.fontys.s3.indi.diamond_director_be.configuration.security.token.Impl.AccessTokenImpl;
 import nl.fontys.s3.indi.diamond_director_be.domain.Auth.LogInRequest;
 import nl.fontys.s3.indi.diamond_director_be.domain.Auth.LogInResponse;
-import nl.fontys.s3.indi.diamond_director_be.domain.Enums.UserRoles;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.UserRoles;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.UserEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @AllArgsConstructor

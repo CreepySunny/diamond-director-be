@@ -3,7 +3,7 @@ package nl.fontys.s3.indi.diamond_director_be.business.impl;
 import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.DUP_EMAIL_EXCEPTION;
 import nl.fontys.s3.indi.diamond_director_be.domain.Coach.*;
 import nl.fontys.s3.indi.diamond_director_be.domain.Auth.CreateUserResponse;
-import nl.fontys.s3.indi.diamond_director_be.domain.Enums.UserRoles;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.UserRoles;
 import nl.fontys.s3.indi.diamond_director_be.persistance.CoachRepository;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.UserEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.CoachEntity;

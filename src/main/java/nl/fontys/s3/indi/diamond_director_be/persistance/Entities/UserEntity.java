@@ -3,7 +3,7 @@ package nl.fontys.s3.indi.diamond_director_be.persistance.Entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import nl.fontys.s3.indi.diamond_director_be.domain.Enums.UserRoles;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.UserRoles;
 import org.hibernate.validator.constraints.Length;
 
 @Table(name = "user_account")
