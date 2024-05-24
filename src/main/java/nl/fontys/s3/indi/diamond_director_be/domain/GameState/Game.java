@@ -11,7 +11,8 @@ import java.util.List;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class Game {
     private Long id;
+    private String season;
     private LineUpCard homeLineUp, awayLineUp;
-    private Integer homeScore, awayScore;
+    private Integer homeScore, awayScore, outs, inning;
     private List<Play> playsInAGame;
 }

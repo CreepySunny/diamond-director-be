@@ -23,10 +23,16 @@ public class GameEntity {
     @NotBlank
     private String season;
 
-    private int homeScore, awayScore;
+    private int homeScore, awayScore, inning, outs;
 
-    private LineUpCardEntity awayLineUpCard, homeLineUpCard;
+    @OneToOne
+    @JoinColumn(name = "away_lineup_card_id")
+    private LineUpCardEntity awayLineUpCard;
 
+    @OneToOne
+    @JoinColumn(name = "home_lineup_card_id")
+    private LineUpCardEntity homeLineUpCard;
 
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
     private List<PlayEntity> plays;
 }

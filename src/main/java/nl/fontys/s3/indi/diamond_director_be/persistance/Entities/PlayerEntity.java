@@ -11,6 +11,7 @@ import nl.fontys.s3.indi.diamond_director_be.domain.Player.PlayerPosition;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Table(name = "player")
 @Builder @AllArgsConstructor @NoArgsConstructor @Entity @Data
@@ -58,4 +59,7 @@ public class PlayerEntity {
     @ManyToOne
     @JoinColumn(name = "team_id")
     private TeamEntity team;
+
+    @ManyToMany(mappedBy = "fielders")
+    private List<PlayEntity> playsInvolvedIn;
 }

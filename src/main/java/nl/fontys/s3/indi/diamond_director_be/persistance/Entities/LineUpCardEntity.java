@@ -11,14 +11,21 @@ import java.util.List;
 @Entity
 @Data
 @Builder
-@Table(name = "")
+@Table(name = "lineup_card")
 @NoArgsConstructor
 @AllArgsConstructor
 public class LineUpCardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne
+    @JoinColumn(name = "team_id")
     private TeamEntity team;
+
+    @OneToMany(mappedBy = "lineupCard", cascade = CascadeType.ALL)
     private List<LineUpCardEntryEntity> lineUpCardEntries;
+
+    @OneToMany(mappedBy = "lineupCard")
     private List<PlayerEntity> substitutions;
 }
