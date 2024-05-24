@@ -16,5 +16,6 @@ public class ScoreController {
     @PostMapping
     public ResponseEntity<Void> addNewGameScore(@RequestBody @Valid ScoreRequest scoreRequest) {
 
+        return ResponseEntity.ok().build();
     }
 }

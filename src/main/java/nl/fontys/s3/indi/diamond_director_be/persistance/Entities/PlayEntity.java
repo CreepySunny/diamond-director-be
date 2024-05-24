@@ -45,7 +45,7 @@ public class PlayEntity {
     private List<PlayerEntity> fielders;
 
     @OneToMany(mappedBy = "play", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BaseRunnerEntity> baseRunners = new ArrayList<>();
+    private List<BaseRunnerEntity> baseRunners;
 
 
     private Integer rbi;
