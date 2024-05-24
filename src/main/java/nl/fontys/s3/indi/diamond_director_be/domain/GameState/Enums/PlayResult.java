@@ -1,4 +1,4 @@
-package nl.fontys.s3.indi.diamond_director_be.domain.GameState;
+package nl.fontys.s3.indi.diamond_director_be.domain.GameState.Enums;
 
 import lombok.Getter;
 @Getter
