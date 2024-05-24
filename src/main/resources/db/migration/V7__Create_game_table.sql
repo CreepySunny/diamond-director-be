@@ -1,0 +1,10 @@
+CREATE TABLE game (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  season VARCHAR(255) NOT NULL,
+  home_score INT DEFAULT 0,
+  away_score INT DEFAULT 0,
+  inning INT DEFAULT 1,
+  outs INT DEFAULT 0,
+  away_lineup_card_id BIGINT,
+  home_lineup_card_id BIGINT
+);
