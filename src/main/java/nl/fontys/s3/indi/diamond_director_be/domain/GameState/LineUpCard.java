@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.domain.Player.Player;
 
 import java.util.List;
-import java.util.Map;
 
-@Data @AllArgsConstructor @NoArgsConstructor @Builder
-public class Play {
-    private Player batter;
-    private PlayResult playResult;
-    private List<Player> fielders;
-    private Map<Bases, Player> baseRunners;
-    private Integer rbi;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class LineUpCard {
+    private Long id;
+    private String teamName;
+    private List<LineUpCardEntry> lineUpCardEntries;
+    private List<Player> substitutions;
 }

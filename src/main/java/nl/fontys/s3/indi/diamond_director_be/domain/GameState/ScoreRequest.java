@@ -9,11 +9,15 @@ import nl.fontys.s3.indi.diamond_director_be.domain.Player.Player;
 import java.util.List;
 import java.util.Map;
 
-@Data @AllArgsConstructor @NoArgsConstructor @Builder
-public class Play {
-    private Player batter;
-    private PlayResult playResult;
-    private List<Player> fielders;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class ScoreRequest {
+    private Long gameId;
+    private Long batterId;
+    private String playShorthand;
+    private List<Long> fieldersPlayerIds;
     private Map<Bases, Player> baseRunners;
     private Integer rbi;
 }

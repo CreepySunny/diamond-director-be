@@ -10,5 +10,6 @@ public enum PlayerPosition {
     center_field,
     catcher,
     starter,
-    reliever
+    reliever,
+    pitcher
 }

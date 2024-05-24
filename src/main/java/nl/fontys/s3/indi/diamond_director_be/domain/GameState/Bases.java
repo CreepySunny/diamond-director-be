@@ -1,4 +1,4 @@
-package nl.fontys.s3.indi.diamond_director_be.domain.Game;
+package nl.fontys.s3.indi.diamond_director_be.domain.GameState;
 
 public enum Bases {
     first,

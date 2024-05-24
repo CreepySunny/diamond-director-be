@@ -1,4 +1,4 @@
-package nl.fontys.s3.indi.diamond_director_be.domain.Game;
+package nl.fontys.s3.indi.diamond_director_be.domain.GameState;
 
 import lombok.Getter;
 @Getter
@@ -13,8 +13,14 @@ public enum PlayResult {
     STRIKEOUT("K"),
     SACRIFICE_FLY("SF"),
     ERROR("E"),
+    GROUNDOUT("GO"),
+    FLYOUT("FO"),
+    LINEOUT("LO"),
+    POP_OUT("PO"),
+    FIELDERS_CHOICE("FC"),
 
     // Walk types
+    WALK("BB"),
     NON_INTENTIONAL_WALK("NIBB"),
     INTENTIONAL_WALK("IBB"),
 
