@@ -54,4 +54,8 @@ public class PlayerEntity {
     @OneToOne
     @JoinColumn(name = "user_entity_id")
     private UserEntity userEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private TeamEntity team;
 }

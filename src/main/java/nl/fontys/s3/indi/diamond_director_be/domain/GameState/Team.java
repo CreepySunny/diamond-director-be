@@ -1,4 +1,4 @@
-package nl.fontys.s3.indi.diamond_director_be.domain;
+package nl.fontys.s3.indi.diamond_director_be.domain.GameState;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +11,7 @@ import java.util.List;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class Team {
+    private String teamName;
     List<Coaches> coaches;
     List<Player> rooster;
     List<Player> lineUpCard;

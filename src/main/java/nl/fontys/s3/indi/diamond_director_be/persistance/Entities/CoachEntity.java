@@ -53,4 +53,7 @@ public class CoachEntity {
     @Convert(converter = NumericBooleanConverter.class)
     private Boolean canScoreKeep;
 
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private TeamEntity team;
 }
