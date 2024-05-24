@@ -1,10 +1,12 @@
 package nl.fontys.s3.indi.diamond_director_be.domain.GameState;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Enums.Bases;
+import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Enums.InningHalves;
 import nl.fontys.s3.indi.diamond_director_be.domain.Player.Player;
 
 import java.util.List;
@@ -15,6 +17,8 @@ import java.util.Map;
 @NoArgsConstructor
 @Builder
 public class ScoreRequest {
+    private Integer inning;
+    private InningHalves half;
     private Long gameId;
     private Long batterId;
     private String playShorthand;
