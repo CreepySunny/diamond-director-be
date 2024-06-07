@@ -117,7 +117,6 @@ public class AddNewBaseballPlayUseCaseImpl implements AddNewBaseballPlayUseCase 
                 break;
             case ERROR:
             case FIELDERS_CHOICE:
-                // Custom logic based on game rules
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported play result: " + playResult);
