@@ -17,8 +17,8 @@ public class Play {
     private Integer inning;
     private InningHalves half;
     private Player batter;
+    private Player pitcher;
     private PlayResult playResult;
-    private List<Player> fielders;
-    private Map<Bases, Player> baseRunners;
+    private List<Long> fielders;
     private Integer rbi;
 }

@@ -21,17 +21,24 @@ public class GameEntity {
     private Long id;
 
     @NotBlank
+    @Column(name = "season")
     private String season;
 
-    private int homeScore, awayScore, inning, outs;
+    @NotBlank
+    @Column(name = "home_score")
+    private int homeScore;
 
-    @OneToOne
-    @JoinColumn(name = "away_lineup_card_id")
-    private LineUpCardEntity awayLineUpCard;
+    @NotBlank
+    @Column(name = "away_score")
+    private int awayScore;
 
-    @OneToOne
-    @JoinColumn(name = "home_lineup_card_id")
-    private LineUpCardEntity homeLineUpCard;
+    @NotBlank
+    @Column(name = "inning")
+    private int inning;
+
+    @NotBlank
+    @Column(name = "outs")
+    private int outs;
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
     private List<PlayEntity> plays;

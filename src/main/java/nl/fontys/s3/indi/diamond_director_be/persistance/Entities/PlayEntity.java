@@ -1,6 +1,7 @@
 package nl.fontys.s3.indi.diamond_director_be.persistance.Entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,24 +34,27 @@ public class PlayEntity {
     @JoinColumn(name = "batter_id")
     private PlayerEntity batter;
 
+    @ManyToOne
+    @JoinColumn(name = "pitcher_id")
+    private PlayerEntity pitcher;
+
+    @Column(name = "play_result")
     @Enumerated(EnumType.STRING)
     private PlayResult playResult;
 
-    @ManyToMany
-    @JoinTable(
-            name = "play_fielders",
-            joinColumns = @JoinColumn(name = "play_id"),
-            inverseJoinColumns = @JoinColumn(name = "player_id")
-    )
-    private List<PlayerEntity> fielders;
+    @OneToMany(mappedBy = "play", cascade = CascadeType.ALL)
+    private List<PlayFielderEntity> fielders;
 
-    @OneToMany(mappedBy = "play", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BaseRunnerEntity> baseRunners;
-
-
+    @NotNull
+    @Column(name = "rbi")
     private Integer rbi;
+
+    @NotNull
+    @Column(name = "inning")
     private Integer inning;
 
+    @NotNull
+    @Column(name = "half")
     @Enumerated(EnumType.STRING)
     private InningHalves half;
 }
