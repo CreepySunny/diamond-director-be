@@ -6,6 +6,8 @@ CREATE TABLE play (
   rbi INT,
   inning INT,
   half VARCHAR(255),
+  pitcher_id BIGINT,
   FOREIGN KEY (game_id) REFERENCES game(id) ON DELETE CASCADE,
-  FOREIGN KEY (batter_id) REFERENCES player(id)
+  FOREIGN KEY (batter_id) REFERENCES player(id),
+  FOREIGN KEY (pitcher_id) REFERENCES player(id)
 );

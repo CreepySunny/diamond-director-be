@@ -1,8 +1,0 @@
-CREATE TABLE base_runner (
- id BIGINT PRIMARY KEY AUTO_INCREMENT,
- play_id BIGINT NOT NULL,
- base VARCHAR(255) NOT NULL,
- player_id BIGINT NOT NULL,
- FOREIGN KEY (play_id) REFERENCES play(id) ON DELETE CASCADE,
- FOREIGN KEY (player_id) REFERENCES player(id)
-);
