@@ -1,0 +1,6 @@
+CREATE TABLE play_fielder (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  play_id BIGINT NOT NULL,
+  fielder_position BIGINT NOT NULL,
+  FOREIGN KEY (play_id) REFERENCES play(id) ON DELETE CASCADE
+);

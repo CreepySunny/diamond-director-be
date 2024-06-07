@@ -11,6 +11,8 @@ public final class PlayConverter {
                 .inning(playEntity.getInning())
                 .half(playEntity.getHalf())
                 .playResult(playEntity.getPlayResult())
+                .batter(PlayerConverter.convert(playEntity.getBatter()))
+                .pitcher(PlayerConverter.convert(playEntity.getPitcher()))
                 .rbi(playEntity.getRbi())
                 .build();
     }
