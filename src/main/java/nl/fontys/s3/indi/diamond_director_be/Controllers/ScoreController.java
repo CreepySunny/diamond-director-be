@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.ScoreRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @CrossOrigin(origins = "http://127.0.0.1:5173/")
 public class ScoreController {
+    private final SimpMessagingTemplate messagingTemplate;
 
 
     @PostMapping
