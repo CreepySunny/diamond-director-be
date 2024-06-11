@@ -60,6 +60,9 @@ public class PlayerEntity {
     @JoinColumn(name = "team_id")
     private TeamEntity team;
 
-    @ManyToMany(mappedBy = "fielders")
-    private List<PlayEntity> playsInvolvedIn;
+    @OneToMany(mappedBy = "batter")
+    private List<PlayEntity> playsAsBatter;
+
+    @OneToMany(mappedBy = "pitcher")
+    private List<PlayEntity> playsAsPitcher;
 }
