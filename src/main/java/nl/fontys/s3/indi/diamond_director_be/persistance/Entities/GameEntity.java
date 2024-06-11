@@ -42,4 +42,12 @@ public class GameEntity {
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
     private List<PlayEntity> plays;
+
+    @ManyToOne
+    @JoinColumn(name = "home_team_id")
+    private TeamEntity homeTeam;
+
+    @ManyToOne
+    @JoinColumn(name = "away_team_id")
+    private TeamEntity awayTeam;
 }
