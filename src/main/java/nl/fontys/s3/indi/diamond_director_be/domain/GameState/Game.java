@@ -20,6 +20,8 @@ public class Game {
     private Integer outs = 0;
     private Integer inning = 1;
     private InningHalves currentHalf = InningHalves.TOP;
+    private Team home;
+    private Team away;
     private Map<Bases, Player> baseRunners = new HashMap<>();
     private List<Play> playsInAGame = new ArrayList<>();
 }
