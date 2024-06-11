@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.business.CreatePlayerUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.DUP_EMAIL_EXCEPTION;
 import nl.fontys.s3.indi.diamond_director_be.domain.Auth.CreateUserResponse;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.UserRoles;
 import nl.fontys.s3.indi.diamond_director_be.domain.Player.CreatePlayerRequest;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.PlayerEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.UserEntity;
@@ -30,7 +31,7 @@ public class CreatePlayerUseCaseImpl implements CreatePlayerUseCase {
                 .builder()
                 .email(request.getEmail())
                 .password(encodedPassword)
-                .role(request.getRole())
+                .role(UserRoles.PLAYER)
                 .build();
 
         UserEntity userEntity = userRepository.save(userEntityToSave);
