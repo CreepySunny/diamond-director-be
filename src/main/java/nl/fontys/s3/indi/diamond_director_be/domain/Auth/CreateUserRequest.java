@@ -24,6 +24,5 @@ public class CreateUserRequest {
     @NotBlank
     private String password;
 
-    @NotNull
     private UserRoles role;
 }
