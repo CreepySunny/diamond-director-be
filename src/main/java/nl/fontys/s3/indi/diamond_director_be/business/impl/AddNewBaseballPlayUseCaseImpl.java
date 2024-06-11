@@ -64,7 +64,7 @@ public class AddNewBaseballPlayUseCaseImpl implements AddNewBaseballPlayUseCase 
         }
 
         GameEntity updatedGameEntity = GameConverter.convert(game);
-        gameRepository.updateGame(updatedGameEntity);
+        gameRepository.save(    updatedGameEntity);
     }
 
     private Game findGameFromId(Long gameId) {
