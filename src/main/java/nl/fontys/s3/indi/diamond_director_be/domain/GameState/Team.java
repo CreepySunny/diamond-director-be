@@ -14,6 +14,4 @@ public class Team {
     private String teamName;
     List<Coaches> coaches;
     List<Player> rooster;
-    List<Player> lineUpCard;
-    List<Player> substitutions;
 }
