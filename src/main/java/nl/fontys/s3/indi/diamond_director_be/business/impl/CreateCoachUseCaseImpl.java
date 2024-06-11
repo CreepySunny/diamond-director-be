@@ -3,6 +3,7 @@ package nl.fontys.s3.indi.diamond_director_be.business.impl;
 import lombok.AllArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.business.CreateCoachUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.DUP_EMAIL_EXCEPTION;
+import nl.fontys.s3.indi.diamond_director_be.domain.Auth.UserRoles;
 import nl.fontys.s3.indi.diamond_director_be.domain.Coach.CreateCoachRequest;
 import nl.fontys.s3.indi.diamond_director_be.domain.Auth.CreateUserResponse;
 import nl.fontys.s3.indi.diamond_director_be.persistance.CoachRepository;
@@ -29,7 +30,7 @@ public class CreateCoachUseCaseImpl implements CreateCoachUseCase {
                 .builder()
                 .email(request.getEmail())
                 .password(encodedPassword)
-                .role(request.getRole())
+                .role(UserRoles.COACH)
                 .build();
 
             CoachEntity coachEntityToSave = CoachEntity
