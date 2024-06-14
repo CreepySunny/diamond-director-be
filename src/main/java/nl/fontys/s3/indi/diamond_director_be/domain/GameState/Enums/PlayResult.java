@@ -1,6 +1,10 @@
 package nl.fontys.s3.indi.diamond_director_be.domain.GameState.Enums;
 
 import lombok.Getter;
+
+import java.util.HashMap;
+import java.util.Map;
+
 @Getter
 public enum PlayResult {
     // Hit types
@@ -31,5 +35,18 @@ public enum PlayResult {
 
     PlayResult(String shorthand) {
         this.shorthand = shorthand;
+    }
+
+
+    private static final Map<String, PlayResult> SHORTHAND_MAP = new HashMap<>();
+
+    static {
+        for (PlayResult playResult : PlayResult.values()) {
+            SHORTHAND_MAP.put(playResult.getShorthand(), playResult);
+        }
+    }
+
+    public static PlayResult fromShorthand(String shorthand) {
+        return SHORTHAND_MAP.get(shorthand);
     }
 }

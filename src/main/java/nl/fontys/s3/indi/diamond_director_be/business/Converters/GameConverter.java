@@ -3,6 +3,7 @@ package nl.fontys.s3.indi.diamond_director_be.business.Converters;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Game;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.GameEntity;
 
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 public final class GameConverter {
@@ -19,6 +20,7 @@ public final class GameConverter {
                 .playsInAGame(gameEntity.getPlays().stream()
                         .map(PlayConverter::convert)
                         .toList())
+                .baseRunners(new HashMap<>())
                 .build();
     }
 

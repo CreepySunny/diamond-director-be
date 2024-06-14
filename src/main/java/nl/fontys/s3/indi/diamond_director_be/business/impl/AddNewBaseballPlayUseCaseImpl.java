@@ -34,7 +34,7 @@ public class AddNewBaseballPlayUseCaseImpl implements AddNewBaseballPlayUseCase 
 
     @Override
     public Game createNewPlayAndScore(ScoreRequest request) {
-        PlayResult playResult = PlayResult.valueOf(request.getPlayShorthand());
+        PlayResult playResult = PlayResult.fromShorthand(request.getPlayShorthand());
         Game game = findGameFromId(request.getGameId());
 
         Player batter = findPlayerById(request.getBatterId());
@@ -66,7 +66,7 @@ public class AddNewBaseballPlayUseCaseImpl implements AddNewBaseballPlayUseCase 
         GameEntity updatedGameEntity = GameConverter.convert(game);
         gameRepository.save(updatedGameEntity);
 
-        return findGameFromId(request.getGameId());
+        return game;
     }
 
     private Game findGameFromId(Long gameId) {
