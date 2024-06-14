@@ -19,7 +19,7 @@ public class FindCoachesNoTeamUseCaseImpl implements FindCoachesNoTeamUseCase {
     @Override
     @Transactional
     public List<Coaches> findCoachesWithNoTeam() {
-        return coachRepository.findByTeamEmpty().stream()
+        return coachRepository.findByTeamIsNull().stream()
                 .map(CoachConverter::convert)
                 .toList();
     }
