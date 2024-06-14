@@ -24,10 +24,10 @@ public class TeamEntity {
     @Column(name = "team_name")
     private String teamName;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
     private List<CoachEntity> coaches;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
     private List<PlayerEntity> players;
 }
 
