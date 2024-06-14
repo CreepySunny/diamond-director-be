@@ -11,7 +11,6 @@ import nl.fontys.s3.indi.diamond_director_be.persistance.TeamRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -21,14 +20,16 @@ public class CreateTeamUseCaseImpl implements CreateTeamUseCase {
 
     @Override
     public Long createTeam(CreateTeamRequest request) {
-        CoachEntity foundCoach = coachRepository.findByUserEntityId(request.getCreatingUserId()).orElseThrow(NO_COACH_EXCEPTION::new);
+        CoachEntity foundCoach = coachRepository.findByUserEntityEmail(request.getCreateCoachUserEmail()).orElseThrow(NO_COACH_EXCEPTION::new);
         TeamEntity savedTeamEntity = TeamEntity.builder()
                 .teamName(request.getTeamName())
-                .coaches(List.of(foundCoach))
+                .coaches(new ArrayList<>())
                 .players(new ArrayList<>())
                 .build();
 
         savedTeamEntity = teamRepository.save(savedTeamEntity);
+        foundCoach.setTeam(savedTeamEntity);
+        coachRepository.save(foundCoach);
 
         return savedTeamEntity.getTeamId();
     }
