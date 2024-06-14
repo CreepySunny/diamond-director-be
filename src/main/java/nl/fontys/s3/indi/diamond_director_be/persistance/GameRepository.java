@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GameRepository extends JpaRepository<GameEntity, Long> {
     @Query("SELECT g FROM GameEntity g " +
