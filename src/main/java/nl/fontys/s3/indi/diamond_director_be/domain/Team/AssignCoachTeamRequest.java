@@ -1,6 +1,7 @@
 package nl.fontys.s3.indi.diamond_director_be.domain.Team;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,6 @@ public class AssignCoachTeamRequest {
     @NotBlank
     private String teamName;
 
-    @NotBlank
-    private String coachEmail;
+    @NotNull
+    private Long coachId;
 }
