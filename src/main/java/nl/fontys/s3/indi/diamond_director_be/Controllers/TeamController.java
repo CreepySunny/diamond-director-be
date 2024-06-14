@@ -1,6 +1,7 @@
 package nl.fontys.s3.indi.diamond_director_be.Controllers;
 
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,30 +27,23 @@ public class TeamController {
     private final AssignCoachToTeamUseCase assignCoachToTeamUseCase;
 
     @PostMapping
+    @RolesAllowed({"COACH"})
     public ResponseEntity<Long> createNewTeam(@RequestBody @Valid CreateTeamRequest request){
            Long newId = createTeamUseCase.createTeam(request);
-
            return ResponseEntity.status(HttpStatus.CREATED).body(newId);
     }
 
     @GetMapping("{email}")
-    public ResponseEntity<FindTeamResponse> findTeamByUserEmail(@PathVariable String email){
-        Team team;
-        try {
-            team = findTeamFromUserEmailUseCase.findTeamFromUserEmail(email);
-        }catch (HttpStatusCodeException exception){
-            return ResponseEntity.status(exception.getStatusCode()).body(FindTeamResponse.builder().exception(exception).build());
-        }
-        return ResponseEntity.ok(FindTeamResponse.builder().team(team).build());
+    @RolesAllowed({"COACH"})
+    public ResponseEntity<Team> findTeamByUserEmail(@PathVariable String email){
+        Team team = findTeamFromUserEmailUseCase.findTeamFromUserEmail(email);
+        return ResponseEntity.ok(team);
     }
 
     @PutMapping
+    @RolesAllowed({"COACH"})
     public ResponseEntity<Void> assignCoachToTeam(@RequestBody @Valid AssignCoachTeamRequest request){
-        try {
             assignCoachToTeamUseCase.assignCoachToTeam(request);
-        }catch (HttpStatusCodeException exception){
-            return ResponseEntity.status(exception.getStatusCode()).build();
-        }
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
