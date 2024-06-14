@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Enums.Bases;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Enums.InningHalves;
 import nl.fontys.s3.indi.diamond_director_be.domain.Player.Player;
+import nl.fontys.s3.indi.diamond_director_be.domain.Team.Team;
 
 import java.util.*;
 

@@ -1,12 +1,11 @@
 package nl.fontys.s3.indi.diamond_director_be.business.Converters;
 
 import nl.fontys.s3.indi.diamond_director_be.domain.Coach.Coaches;
-import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Team;
+import nl.fontys.s3.indi.diamond_director_be.domain.Team.Team;
 import nl.fontys.s3.indi.diamond_director_be.domain.Player.Player;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.CoachEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.PlayerEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.TeamEntity;
-import nl.fontys.s3.indi.diamond_director_be.persistance.TeamRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;

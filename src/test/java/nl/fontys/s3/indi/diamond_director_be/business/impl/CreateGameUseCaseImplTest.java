@@ -2,7 +2,6 @@ package nl.fontys.s3.indi.diamond_director_be.business.impl;
 
 import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.NO_TEAM_FOUND_EXCEPTION;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.CreateGameRequest;
-import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Team;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.GameEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.TeamEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.GameRepository;
