@@ -1,20 +1,18 @@
 package nl.fontys.s3.indi.diamond_director_be.Controllers;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.business.CreateCoachUseCase;
-import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.NO_COACH_EXCEPTION;
 import nl.fontys.s3.indi.diamond_director_be.business.FindCoachesFromTeamNameUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.FindCoachesNoTeamUseCase;
 import nl.fontys.s3.indi.diamond_director_be.domain.Auth.CreateUserResponse;
 import nl.fontys.s3.indi.diamond_director_be.domain.Coach.Coaches;
 import nl.fontys.s3.indi.diamond_director_be.domain.Coach.CreateCoachRequest;
-import nl.fontys.s3.indi.diamond_director_be.domain.Coach.FindCoachesResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
 import java.util.List;
 
 
@@ -34,19 +32,16 @@ public class CoachController {
     }
 
     @GetMapping("/team/{teamName}")
-    public ResponseEntity<FindCoachesResponse> findCoachesFromTeamName(@PathVariable String teamName){
-        List<Coaches> foundCoaches;
-        try {
-            foundCoaches = findCoachesFromTeamNameUseCase.findCoachFromTeamName(teamName);
-        }catch (NO_COACH_EXCEPTION exception){
-            return ResponseEntity.status(exception.getStatusCode()).body(FindCoachesResponse.builder().exception(exception).build());
-        }
-        return ResponseEntity.ok(FindCoachesResponse.builder().coaches(foundCoaches).build());
+    @RolesAllowed({"COACH"})
+    public ResponseEntity<Coaches[]> findCoachesFromTeamName(@PathVariable String teamName){
+        List<Coaches> foundCoaches = findCoachesFromTeamNameUseCase.findCoachFromTeamName(teamName);
+        return ResponseEntity.ok(foundCoaches.toArray(new Coaches[foundCoaches.size()]));
     }
 
     @GetMapping("/no-team")
-    public ResponseEntity<FindCoachesResponse> findCoachesNoTeam(){
+    @RolesAllowed({"COACH"})
+    public ResponseEntity<Coaches[]> findCoachesNoTeam(){
         List<Coaches> foundCoaches = findCoachesNoTeamUseCase.findCoachesWithNoTeam();
-        return ResponseEntity.ok(FindCoachesResponse.builder().coaches(foundCoaches).build());
+        return ResponseEntity.ok(foundCoaches.toArray(new Coaches[foundCoaches.size()]));
     }
 }
