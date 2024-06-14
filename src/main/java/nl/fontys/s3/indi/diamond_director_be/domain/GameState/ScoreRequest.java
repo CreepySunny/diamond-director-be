@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Enums.InningHalves;
+import nl.fontys.s3.indi.diamond_director_be.domain.Player.PlayerPosition;
 
 import java.util.List;
 
@@ -19,5 +20,5 @@ public class ScoreRequest {
     private Long batterId;
     private Long pitcherId;
     private String playShorthand;
-    private List<Long> fieldersPositions;
+    private List<PlayerPosition> fieldersPositions;
 }

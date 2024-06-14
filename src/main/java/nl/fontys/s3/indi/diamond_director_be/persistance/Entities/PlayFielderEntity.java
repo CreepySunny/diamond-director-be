@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import nl.fontys.s3.indi.diamond_director_be.domain.Player.PlayerPosition;
 
 @Entity
 @Table(name = "play_fielder")
@@ -22,5 +23,6 @@ public class PlayFielderEntity {
     private PlayEntity play;
 
     @Column(name = "fielder_position")
-    private Long fielder;
+    @Enumerated(EnumType.STRING)
+    private PlayerPosition fielder;
 }
