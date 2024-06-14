@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateTeamRequest {
-    @NotNull
-    private Long creatingUserId;
+    @NotBlank
+    private String createCoachUserEmail;
 
     @NotBlank
     private String teamName;
