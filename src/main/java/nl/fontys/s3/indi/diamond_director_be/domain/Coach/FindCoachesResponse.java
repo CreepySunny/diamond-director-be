@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FindCoachesFromTeamNameResponse {
+public class FindCoachesResponse {
     private HttpStatusCodeException exception;
     private List<Coaches> coaches;
 }
