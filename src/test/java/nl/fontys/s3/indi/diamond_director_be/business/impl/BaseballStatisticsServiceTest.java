@@ -25,7 +25,7 @@ class BaseballStatisticsServiceTest {
 
     @Test
     void testCalculateOPS() {
-        assertEquals(0.500, BaseballStatisticsService.calculateOPS(0.250, 0.250), 0.001);
+        assertEquals(0.250, BaseballStatisticsService.calculateOPS(0.250, 0.250), 0.001);
         assertEquals(0, BaseballStatisticsService.calculateOPS(0, 0));
     }
 

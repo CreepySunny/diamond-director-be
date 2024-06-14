@@ -29,7 +29,7 @@ public class BaseballStatisticsService {
     }
 
     public static double calculateOPS(double OBP, double SLG) {
-        return OBP + SLG;
+        return (OBP + SLG)/2;
     }
 
     public static double calculateWOBA(int NIBB, int HBP, int singles, int doubles, int triples, int homeRuns,
