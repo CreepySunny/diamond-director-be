@@ -15,4 +15,6 @@ public interface CoachRepository extends JpaRepository<CoachEntity, Long> {
     Optional<CoachEntity> findByUserEntityEmail(String email);
 
     List<CoachEntity> findCoachEntitiesByTeamIs(TeamEntity team);
+
+    List<CoachEntity> findByTeamEmpty();
 }
