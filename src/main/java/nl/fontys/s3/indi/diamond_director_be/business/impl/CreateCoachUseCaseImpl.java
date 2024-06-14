@@ -26,12 +26,17 @@ public class CreateCoachUseCaseImpl implements CreateCoachUseCase {
     public CreateUserResponse createCoach(CreateCoachRequest request) {
         String encodedPassword = passwordEncoder.encode(request.getPassword());
 
+        checkForEmail(request.getEmail());
+
         UserEntity userEntityToSave = UserEntity
                 .builder()
                 .email(request.getEmail())
                 .password(encodedPassword)
                 .role(UserRoles.COACH)
                 .build();
+
+        userEntityToSave = userRepository.save(userEntityToSave);
+
 
             CoachEntity coachEntityToSave = CoachEntity
                     .builder()
@@ -43,18 +48,17 @@ public class CreateCoachUseCaseImpl implements CreateCoachUseCase {
                     .position(request.getPosition())
                     .build();
 
-            coachEntityToSave = saveCoach(coachEntityToSave);
+            coachEntityToSave = coachRepository.save(coachEntityToSave);
 
             return CreateUserResponse.builder().userId(coachEntityToSave.getUserEntity().getId()).build();
     }
 
 
-    private CoachEntity saveCoach(CoachEntity coachToSave){
-        Optional<UserEntity> maybeAExistingUser = userRepository.findByEmail(coachToSave.getUserEntity().getEmail());
-        if (maybeAExistingUser.isEmpty()){
+    private void checkForEmail(String email){
+        Optional<UserEntity> maybeAExistingUser = userRepository.findByEmail(email);
+
+        if(maybeAExistingUser.isPresent()){
             throw new DUP_EMAIL_EXCEPTION();
         }
-
-        return coachRepository.save(coachToSave);
     }
 }

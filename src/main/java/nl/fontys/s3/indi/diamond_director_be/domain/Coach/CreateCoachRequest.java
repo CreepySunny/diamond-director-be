@@ -20,7 +20,6 @@ public class CreateCoachRequest extends CreateUserRequest {
     @NotNull
     private LocalDate dateOfBirth;
 
-
     @NotNull
     private CoachPosition position;
 

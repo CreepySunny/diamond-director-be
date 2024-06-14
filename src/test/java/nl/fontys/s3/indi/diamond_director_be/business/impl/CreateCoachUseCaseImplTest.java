@@ -72,7 +72,7 @@ class CreateCoachUseCaseImplTest {
                 .canScoreKeep(request.getCanScoreKeep())
                 .build();
 
-        when(userRepository.findByEmail(request.getEmail())).thenReturn(Optional.of(userEntityToSave));
+        when(userRepository.findByEmail(request.getEmail())).thenReturn(Optional.empty());
         when(coachRepository.save(any(CoachEntity.class))).thenReturn(coachEntityToSave);
 
         // When
@@ -118,7 +118,7 @@ class CreateCoachUseCaseImplTest {
                 .canScoreKeep(request.getCanScoreKeep())
                 .build();
 
-        when(userRepository.findByEmail(request.getEmail())).thenReturn(Optional.empty());
+        when(userRepository.findByEmail(request.getEmail())).thenReturn(Optional.of(userEntityToSave));
         when(coachRepository.save(any(CoachEntity.class))).thenReturn(coachEntityToSave);
 
         // When
