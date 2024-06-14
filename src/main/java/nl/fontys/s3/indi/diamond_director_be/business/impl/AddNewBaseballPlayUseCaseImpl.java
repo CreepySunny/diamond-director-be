@@ -13,6 +13,7 @@ import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Enums.PlayResult;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Game;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.ScoreRequest;
 import nl.fontys.s3.indi.diamond_director_be.domain.Player.Player;
+import nl.fontys.s3.indi.diamond_director_be.domain.Player.PlayerPosition;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.GameEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.PlayEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.PlayFielderEntity;
@@ -32,7 +33,7 @@ public class AddNewBaseballPlayUseCaseImpl implements AddNewBaseballPlayUseCase 
     private final PlayerRepository playerRepository;
 
     @Override
-    public void createNewPlayAndScore(ScoreRequest request) {
+    public Game createNewPlayAndScore(ScoreRequest request) {
         PlayResult playResult = PlayResult.valueOf(request.getPlayShorthand());
         Game game = findGameFromId(request.getGameId());
 
@@ -50,11 +51,10 @@ public class AddNewBaseballPlayUseCaseImpl implements AddNewBaseballPlayUseCase 
                 .build();
         PlayEntity savedPlay = playRepository.save(playEntity);
 
-
-        List<Long> fielderPositions = request.getFieldersPositions();
+        List<PlayerPosition> fielderPositions = request.getFieldersPositions();
         if (fielderPositions != null && !fielderPositions.isEmpty()) {
             List<PlayFielderEntity> playFielders = new ArrayList<>();
-            for (Long fieldPosition : fielderPositions) {
+            for (PlayerPosition fieldPosition : fielderPositions) {
                 PlayFielderEntity playFielderEntity = new PlayFielderEntity();
                 playFielderEntity.setPlay(savedPlay);
                 playFielderEntity.setFielder(fieldPosition);
@@ -64,7 +64,9 @@ public class AddNewBaseballPlayUseCaseImpl implements AddNewBaseballPlayUseCase 
         }
 
         GameEntity updatedGameEntity = GameConverter.convert(game);
-        gameRepository.save(    updatedGameEntity);
+        gameRepository.save(updatedGameEntity);
+
+        return findGameFromId(request.getGameId());
     }
 
     private Game findGameFromId(Long gameId) {
