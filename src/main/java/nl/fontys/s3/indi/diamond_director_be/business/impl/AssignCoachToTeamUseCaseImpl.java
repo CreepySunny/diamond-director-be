@@ -21,11 +21,9 @@ public class AssignCoachToTeamUseCaseImpl implements AssignCoachToTeamUseCase {
 
     @Override
     public void assignCoachToTeam(AssignCoachTeamRequest request) {
-        CoachEntity foundCoach = coachRepository.findByUserEntityEmail(request.getCoachEmail()).orElseThrow(NO_COACH_EXCEPTION::new);
+        CoachEntity foundCoach = coachRepository.findById(request.getCoachId()).orElseThrow(NO_COACH_EXCEPTION::new);
         TeamEntity foundTeam = teamRepository.findByTeamName(request.getTeamName()).orElseThrow(NO_TEAM_FOUND_EXCEPTION::new);
-        List<CoachEntity> currentCoaches = foundTeam.getCoaches();
-        currentCoaches.add(foundCoach);
-        foundTeam.setCoaches(currentCoaches);
-        teamRepository.save(foundTeam);
+        foundCoach.setTeam(foundTeam);
+        coachRepository.save(foundCoach);
     }
 }
