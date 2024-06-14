@@ -1,0 +1,17 @@
+package nl.fontys.s3.indi.diamond_director_be.domain.Team;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.web.client.HttpStatusCodeException;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class FindTeamResponse {
+    private HttpStatusCodeException exception;
+    private Team team;
+}
