@@ -1,6 +1,7 @@
 package nl.fontys.s3.indi.diamond_director_be.Controllers;
 
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.business.CreateGameUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.NO_GAME_EXCEPTION;
