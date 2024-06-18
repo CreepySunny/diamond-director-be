@@ -2,6 +2,7 @@ package nl.fontys.s3.indi.diamond_director_be.persistance.Entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,19 +25,19 @@ public class GameEntity {
     @Column(name = "season")
     private String season;
 
-    @NotBlank
+    @NotNull
     @Column(name = "home_score")
     private int homeScore;
 
-    @NotBlank
+    @NotNull
     @Column(name = "away_score")
     private int awayScore;
 
-    @NotBlank
+    @NotNull
     @Column(name = "inning")
     private int inning;
 
-    @NotBlank
+    @NotNull
     @Column(name = "outs")
     private int outs;
 
