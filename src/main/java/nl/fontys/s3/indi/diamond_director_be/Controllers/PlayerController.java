@@ -90,7 +90,6 @@ public class PlayerController {
     }
 
     private PlayerEntity findPlayerById(Long playerId){
-        Optional<PlayerEntity> foundPlayer = playerRepository.findById(playerId);
-        return foundPlayer.orElseThrow(NO_PLAYER_EXCEPTION::new);
+        return playerRepository.findById(playerId).orElseThrow(NO_PLAYER_EXCEPTION::new);
     }
 }
