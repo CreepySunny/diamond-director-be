@@ -1,5 +1,6 @@
 package nl.fontys.s3.indi.diamond_director_be.business.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.business.AddNewBaseballPlayUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.Converters.GameConverter;
@@ -33,6 +34,7 @@ public class AddNewBaseballPlayUseCaseImpl implements AddNewBaseballPlayUseCase 
     private final PlayerRepository playerRepository;
 
     @Override
+    @Transactional
     public Game createNewPlayAndScore(ScoreRequest request) {
         PlayResult playResult = PlayResult.fromShorthand(request.getPlayShorthand());
         Game game = findGameFromId(request.getGameId());
