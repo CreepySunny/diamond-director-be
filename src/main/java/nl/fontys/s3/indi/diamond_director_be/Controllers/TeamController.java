@@ -23,6 +23,7 @@ public class TeamController {
     private final AssignPlayerToTeamUseCase assignPlayerToTeamUseCase;
     private final FindAllTeamsUseCase findAllTeamsUseCase;
     private final DeleteTeamUsingTeamNameUseCase deleteTeamUsingTeamNameUseCase;
+    private final SearchForTeamUsingTeamNameUseCase searchForTeamUsingTeamNameUseCase;
 
     @PostMapping
     @RolesAllowed({"COACH"})
@@ -63,5 +64,10 @@ public class TeamController {
     public ResponseEntity<Void> deleteTeamByName(@PathVariable String teamName){
         deleteTeamUsingTeamNameUseCase.deleteTeamUsingTeamName(teamName);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @GetMapping("search/{teamName}")
+    public ResponseEntity<Team> searchForTeamUsingTeamName(@PathVariable String teamName){
+        return ResponseEntity.ok(searchForTeamUsingTeamNameUseCase.searchForTeam(teamName));
     }
 }
