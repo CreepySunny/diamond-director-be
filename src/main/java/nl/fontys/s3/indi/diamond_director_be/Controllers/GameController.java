@@ -30,7 +30,7 @@ public class GameController {
     @PostMapping
     @RolesAllowed({"ADMIN", "COACH"})
     public ResponseEntity<Long> createGame(@RequestBody CreateGameRequest request) {
-        return ResponseEntity.ok(createGameUseCase.createGame(request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(createGameUseCase.createGame(request));
     }
 
     @GetMapping("{id}")
