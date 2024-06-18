@@ -13,7 +13,6 @@ public final class PlayConverter {
                 .playResult(playEntity.getPlayResult())
                 .batter(PlayerConverter.convert(playEntity.getBatter()))
                 .pitcher(PlayerConverter.convert(playEntity.getPitcher()))
-                .rbi(playEntity.getRbi())
                 .build();
     }
 }

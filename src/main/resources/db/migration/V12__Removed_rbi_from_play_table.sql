@@ -1,0 +1,1 @@
+ALTER TABLE play DROP COLUMN rbi;

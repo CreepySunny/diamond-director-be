@@ -39,10 +39,6 @@ public class PlayEntity {
     private PlayResult playResult;
 
     @NotNull
-    @Column(name = "rbi")
-    private Integer rbi;
-
-    @NotNull
     @Column(name = "inning")
     private Integer inning;
 
