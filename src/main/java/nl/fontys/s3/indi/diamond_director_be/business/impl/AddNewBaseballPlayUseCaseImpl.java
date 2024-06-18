@@ -18,13 +18,10 @@ import nl.fontys.s3.indi.diamond_director_be.domain.Player.PlayerPosition;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.GameEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.PlayEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.PlayFielderEntity;
-import nl.fontys.s3.indi.diamond_director_be.persistance.GameRepository;
-import nl.fontys.s3.indi.diamond_director_be.persistance.PlayRepository;
-import nl.fontys.s3.indi.diamond_director_be.persistance.PlayerRepository;
+import nl.fontys.s3.indi.diamond_director_be.persistance.*;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
