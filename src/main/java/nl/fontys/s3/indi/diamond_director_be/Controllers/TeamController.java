@@ -47,4 +47,17 @@ public class TeamController {
             assignCoachToTeamUseCase.assignCoachToTeam(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+    @PutMapping("assign/player")
+    @RolesAllowed({"COACH"})
+    public ResponseEntity<Void> assignPlayerTeam(@RequestBody @Valid AssignPlayerTeamRequest request){
+        assignPlayerToTeamUseCase.assignPlayerToTeam(request);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping
+    @RolesAllowed({"COACH"})
+    public ResponseEntity<Team[]> findAllTeams(){
+        List<Team> foundTeams = findAllTeamsUseCase.findAllTeams();
+        return ResponseEntity.ok(foundTeams.toArray(new Team[foundTeams.size()]));
+    }
 }
