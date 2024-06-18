@@ -16,16 +16,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class GetGamesByCoachIdUseCseImplTest {
+class GetGamesByCoachUserEmailUseCseImplTest {
 
     @Mock
     private GameRepository gameRepository;
 
     @InjectMocks
-    private GetGamesByCoachIdUseCseImpl getGamesByCoachIdUseCse;
+    private GetGamesByCoachUserEmailUseCseImpl getGamesByCoachIdUseCse;
 
     private GameEntity gameEntity;
     private List<GameEntity> gameEntities;
@@ -51,9 +52,9 @@ class GetGamesByCoachIdUseCseImplTest {
 
     @Test
     void findGamesByCoachId_gamesFound() {
-        when(gameRepository.findGamesByCoachId(anyLong())).thenReturn(gameEntities);
+        when(gameRepository.findGamesByCoachUserEmail(anyString())).thenReturn(gameEntities);
 
-        List<GameResponse> responses = getGamesByCoachIdUseCse.findGamesByCoachId(1L);
+        List<GameResponse> responses = getGamesByCoachIdUseCse.findGamesByCoachUserEmail("jesus@example.com");
 
         assertNotNull(responses);
         assertEquals(1, responses.size());
@@ -67,9 +68,9 @@ class GetGamesByCoachIdUseCseImplTest {
 
     @Test
     void findGamesByCoachId_noGamesFound() {
-        when(gameRepository.findGamesByCoachId(anyLong())).thenReturn(new ArrayList<>());
+        when(gameRepository.findGamesByCoachUserEmail(anyString())).thenReturn(new ArrayList<>());
 
-        List<GameResponse> responses = getGamesByCoachIdUseCse.findGamesByCoachId(1L);
+        List<GameResponse> responses = getGamesByCoachIdUseCse.findGamesByCoachUserEmail("comcast.example.com");
 
         assertNotNull(responses);
         assertTrue(responses.isEmpty());
