@@ -2,11 +2,10 @@ package nl.fontys.s3.indi.diamond_director_be.persistance;
 
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.GameEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface GameRepository extends JpaRepository<GameEntity, Long> {
     @Query("SELECT g FROM GameEntity g " +
