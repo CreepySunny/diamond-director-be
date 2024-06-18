@@ -78,12 +78,21 @@ public class GameController {
         return ResponseEntity.ok(responses);
     }
 
-    @GetMapping("{id}/all")
+    @PostMapping("score")
     @RolesAllowed({"ADMIN", "COACH"})
-    public ResponseEntity<List<GameResponse>> getAllGamesByCoachId(@PathVariable Long id) {
+    public ResponseEntity<Void> addNewGameScore(@RequestBody @Valid ScoreRequest scoreRequest) {
+        Game updatedGame = addNewBaseballPlayUseCase.createNewPlayAndScore(scoreRequest);
 
-        List<GameResponse> responses = getGamesByCoachIdUseCse.findGamesByCoachId(id);
+        GameStateUpdateMessage message = GameStateUpdateMessage.builder()
+                .awayScore(updatedGame.getAwayScore())
+                .homeScore(updatedGame.getHomeScore())
+                .awayTeamName(updatedGame.getAway().getTeamName())
+                .homeTeamName(updatedGame.getHome().getTeamName())
+                .outs(updatedGame.getOuts())
+                .build();
 
-        return ResponseEntity.ok(responses);
+        simpMessagingTemplate.convertAndSend("/game/" + updatedGame.getId(), message);
+
+        return ResponseEntity.ok().build();
     }
 }
