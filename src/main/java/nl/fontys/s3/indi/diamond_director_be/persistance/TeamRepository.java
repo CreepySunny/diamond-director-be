@@ -20,4 +20,6 @@ public interface TeamRepository extends JpaRepository<TeamEntity, Long> {
     Optional<TeamEntity> findByTeamName(String teamName);
 
     Optional<TeamEntity> findByCoachesContains(CoachEntity coachEntity);
+
+    Optional<TeamEntity> findByTeamNameContainingIgnoreCase(String teamName);
 }
