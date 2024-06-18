@@ -71,20 +71,9 @@ public class GameController {
 
     @GetMapping("{email}/all")
     @RolesAllowed({"ADMIN", "COACH"})
-    public ResponseEntity<List<GameResponse>> getAllGames() {
-        List<GameEntity> foundgames = gameRepository.findAll();
+    public ResponseEntity<List<GameResponse>> getAllGamesByCoachEmail(@PathVariable String email) {
 
-        List<GameResponse> responses;
-
-        if (foundgames.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
-        responses = foundgames.stream().map((entity) -> GameResponse.builder()
-                .season(entity.getSeason())
-                .gameId(entity.getId())
-                .awayTeamName(entity.getAwayTeam().getTeamName())
-                .homeTeamName(entity.getHomeTeam().getTeamName())
-                .build()).toList();
+        List<GameResponse> responses = getGamesByCoachUserEmailUseCse.findGamesByCoachUserEmail(email);
 
         return ResponseEntity.ok(responses);
     }
