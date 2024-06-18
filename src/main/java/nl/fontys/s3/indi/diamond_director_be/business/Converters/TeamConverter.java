@@ -17,11 +17,11 @@ public class TeamConverter {
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setTeamName(team.getTeamName());
         List<CoachEntity> coachEntities = team.getCoaches().stream()
-                .map(coach -> CoachConverter.convert(coach))
+                .map(CoachConverter::convert)
                 .collect(Collectors.toList());
         teamEntity.setCoaches(coachEntities);
         List<PlayerEntity> playerEntities = team.getRooster().stream()
-                .map(player -> PlayerConverter.convert(player))
+                .map(PlayerConverter::convert)
                 .collect(Collectors.toList());
         teamEntity.setPlayers(playerEntities);
         return teamEntity;
@@ -32,11 +32,11 @@ public class TeamConverter {
                 .teamName(teamEntity.getTeamName())
                 .build();
         List<Coaches> coaches = teamEntity.getCoaches().stream()
-                .map(coachEntity -> CoachConverter.convert(coachEntity))
+                .map(CoachConverter::convert)
                 .collect(Collectors.toList());
         team.setCoaches(coaches);
         List<Player> rooster = teamEntity.getPlayers().stream()
-                .map(playerEntity -> PlayerConverter.convert(playerEntity))
+                .map(PlayerConverter::convert)
                 .collect(Collectors.toList());
         team.setRooster(rooster);
         return team;
