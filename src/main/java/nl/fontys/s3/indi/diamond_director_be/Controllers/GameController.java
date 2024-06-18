@@ -36,13 +36,12 @@ public class GameController {
     @GetMapping("{id}")
     @RolesAllowed({"ADMIN", "COACH"})
     public ResponseEntity<GameResponse> getGame(@PathVariable Long id) {
-        GameEntity foundgame = gameRepository.findById(id).orElseThrow(NO_GAME_EXCEPTION::new);
-
+        Game foundGame = findGameFromGameIdUseCase.findGameFromGameId(id);
         GameResponse response = GameResponse.builder()
-                .season(foundgame.getSeason())
-                .gameId(foundgame.getId())
-                .awayTeamName(foundgame.getAwayTeam().getTeamName())
-                .homeTeamName(foundgame.getHomeTeam().getTeamName())
+                .season(foundGame.getSeason())
+                .gameId(foundGame.getId())
+                .awayTeamName(foundGame.getAway().getTeamName())
+                .homeTeamName(foundGame.getHome().getTeamName())
                 .build();
 
         return ResponseEntity.ok(response);
