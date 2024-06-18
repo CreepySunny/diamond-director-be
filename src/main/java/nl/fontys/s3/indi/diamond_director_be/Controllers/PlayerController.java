@@ -42,6 +42,7 @@ public class PlayerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
+    //BrokenAccessController
     @GetMapping("{id}")
     @RolesAllowed({"COACH", "PLAYER"})
     public ResponseEntity<Player> getPlayerById(@PathVariable Long id){
