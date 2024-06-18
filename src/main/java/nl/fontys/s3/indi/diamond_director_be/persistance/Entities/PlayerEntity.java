@@ -14,7 +14,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Table(name = "player")
-@Builder @AllArgsConstructor @NoArgsConstructor @Entity @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Data
 public class PlayerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
