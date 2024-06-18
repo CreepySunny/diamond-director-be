@@ -1,7 +1,6 @@
 package nl.fontys.s3.indi.diamond_director_be.domain.Team;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateTeamRequest {
-    @NotBlank
+    @NotBlank(message = "Coach email must not be blank")
     private String createCoachUserEmail;
 
-    @NotBlank
+    @NotBlank(message = "Team name must not be blank")
     private String teamName;
 }
