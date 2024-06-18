@@ -26,6 +26,7 @@ public class TeamController {
     private final AssignCoachToTeamUseCase assignCoachToTeamUseCase;
     private final AssignPlayerToTeamUseCase assignPlayerToTeamUseCase;
     private final FindAllTeamsUseCase findAllTeamsUseCase;
+    private final DeleteTeamUsingTeamNameUseCase deleteTeamUsingTeamNameUseCase;
 
     @PostMapping
     @RolesAllowed({"COACH"})
@@ -59,5 +60,12 @@ public class TeamController {
     public ResponseEntity<Team[]> findAllTeams(){
         List<Team> foundTeams = findAllTeamsUseCase.findAllTeams();
         return ResponseEntity.ok(foundTeams.toArray(new Team[foundTeams.size()]));
+    }
+
+    @DeleteMapping("{teamName}")
+    @RolesAllowed({"COACH"})
+    public ResponseEntity<Void> deleteTeamByName(@PathVariable String teamName){
+        deleteTeamUsingTeamNameUseCase.deleteTeamUsingTeamName(teamName);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
