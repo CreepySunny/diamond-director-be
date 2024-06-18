@@ -47,7 +47,29 @@ public class GameController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping
+    @GetMapping("games")
+    public ResponseEntity<GameResponse[]> getAllGames() {
+        List<Game> foundGames = findAllGameUseCase.findAll();
+
+        List<GameResponse> responses = foundGames.stream()
+                .map(game -> GameResponse.builder()
+                        .gameId(game.getId())
+                        .season(game.getSeason())
+                        .homeTeamName(game.getHome().getTeamName())
+                        .awayTeamName(game.getAway().getTeamName())
+                        .build())
+                .toList();
+
+        return ResponseEntity.ok(responses.toArray(new GameResponse[foundGames.size()]));
+    }
+
+    @GetMapping("players/{gameId}")
+    @RolesAllowed({"ADMIN", "COACH"})
+    public ResponseEntity<List<Player>> getPlayersFromGameId(@PathVariable Long gameId) {
+        return ResponseEntity.ok(getAllPlayersFromGameIdUseCase.getAllPlayersFromGameId(gameId));
+    }
+
+    @GetMapping("{email}/all")
     @RolesAllowed({"ADMIN", "COACH"})
     public ResponseEntity<List<GameResponse>> getAllGames() {
         List<GameEntity> foundgames = gameRepository.findAll();
