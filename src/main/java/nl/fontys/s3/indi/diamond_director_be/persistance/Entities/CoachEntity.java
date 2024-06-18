@@ -44,7 +44,7 @@ public class CoachEntity {
     private UserEntity userEntity;
 
     @NotNull
-    @Column (name = "coach_position")
+    @Column(name = "coach_position")
     @Enumerated(EnumType.STRING)
     private CoachPosition position;
 
