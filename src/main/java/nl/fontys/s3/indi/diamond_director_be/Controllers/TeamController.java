@@ -41,9 +41,9 @@ public class TeamController {
         return ResponseEntity.ok(team);
     }
 
-    @PutMapping
+    @PutMapping("assign/coach")
     @RolesAllowed({"COACH"})
-    public ResponseEntity<Void> assignCoachToTeam(@RequestBody @Valid AssignCoachTeamRequest request){
+    public ResponseEntity<Void> assignCoachTeam(@RequestBody @Valid AssignCoachTeamRequest request){
             assignCoachToTeamUseCase.assignCoachToTeam(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
