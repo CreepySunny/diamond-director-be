@@ -10,9 +10,15 @@ import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Enums.InningHalves
 import nl.fontys.s3.indi.diamond_director_be.domain.Player.Player;
 import nl.fontys.s3.indi.diamond_director_be.domain.Team.Team;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Game {
     private Long id;
     private String season;

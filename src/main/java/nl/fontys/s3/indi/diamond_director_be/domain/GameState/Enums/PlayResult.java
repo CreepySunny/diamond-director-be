@@ -31,19 +31,18 @@ public enum PlayResult {
     // Other types
     HIT_BY_PITCH("HBP");
 
-    private final String shorthand;
-
-    PlayResult(String shorthand) {
-        this.shorthand = shorthand;
-    }
-
-
     private static final Map<String, PlayResult> SHORTHAND_MAP = new HashMap<>();
 
     static {
         for (PlayResult playResult : PlayResult.values()) {
             SHORTHAND_MAP.put(playResult.getShorthand(), playResult);
         }
+    }
+
+    private final String shorthand;
+
+    PlayResult(String shorthand) {
+        this.shorthand = shorthand;
     }
 
     public static PlayResult fromShorthand(String shorthand) {

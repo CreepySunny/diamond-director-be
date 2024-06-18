@@ -1,6 +1,5 @@
 package nl.fontys.s3.indi.diamond_director_be.domain.Team;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

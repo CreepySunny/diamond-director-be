@@ -9,9 +9,12 @@ import nl.fontys.s3.indi.diamond_director_be.domain.Player.Player;
 
 import java.util.List;
 
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Team {
-    private String teamName;
     List<Coaches> coaches;
     List<Player> rooster;
+    private String teamName;
 }
