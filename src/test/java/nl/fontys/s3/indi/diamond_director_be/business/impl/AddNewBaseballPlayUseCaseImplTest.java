@@ -13,9 +13,11 @@ import nl.fontys.s3.indi.diamond_director_be.domain.Player.Player;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.GameEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.PlayEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.PlayerEntity;
+import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.TeamEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.GameRepository;
 import nl.fontys.s3.indi.diamond_director_be.persistance.PlayerRepository;
 import nl.fontys.s3.indi.diamond_director_be.persistance.PlayRepository;
+import nl.fontys.s3.indi.diamond_director_be.persistance.TeamRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,6 +46,9 @@ class AddNewBaseballPlayUseCaseImplTest {
     @Mock
     private PlayerRepository playerRepository;
 
+    @Mock
+    private TeamRepository teamRepository;
+
     @InjectMocks
     private AddNewBaseballPlayUseCaseImpl addNewBaseballPlayUseCase;
 
@@ -52,6 +57,8 @@ class AddNewBaseballPlayUseCaseImplTest {
     private Game game;
     private PlayerEntity batterEntity;
     private Player batter;
+    private TeamEntity awayTeamEntity;
+    private TeamEntity homeTeamEntity;
 
     @BeforeEach
     void setUp() {
@@ -69,13 +76,31 @@ class AddNewBaseballPlayUseCaseImplTest {
 
         batter = PlayerConverter.convert(batterEntity);
 
+        awayTeamEntity = TeamEntity.builder()
+                .teamId(1L)
+                .teamName("Team1")
+                .players(List.of())
+                .coaches(List.of())
+                .build();
+
+        homeTeamEntity = TeamEntity.builder()
+                .teamId(2L)
+                .teamName("Team2")
+                .players(List.of())
+                .coaches(List.of())
+                .build();
+
         gameEntity = new GameEntity();
         gameEntity.setId(1L);
         gameEntity.setInning(1);
         gameEntity.setOuts(0);
         gameEntity.setAwayScore(0);
         gameEntity.setHomeScore(0);
+
         gameEntity.setPlays(List.of(PlayEntity.builder().id(1L).playResult(PlayResult.DOUBLE).batter(batterEntity).pitcher(batterEntity).build()));
+        gameEntity.setHomeTeam(homeTeamEntity);
+        gameEntity.setAwayTeam(awayTeamEntity);
+
         game = GameConverter.convert(gameEntity);
         game.setBaseRunners(Map.of(Bases.FIRST, batter, Bases.THIRD, batter, Bases.SECOND, batter));
     }
@@ -87,6 +112,8 @@ class AddNewBaseballPlayUseCaseImplTest {
         when(playerRepository.findById(3L)).thenReturn(Optional.of(new PlayerEntity()));
         when(playRepository.save(any(PlayEntity.class))).thenReturn(new PlayEntity());
         when(gameRepository.save(any(GameEntity.class))).thenReturn(gameEntity);
+        when(teamRepository.findAwayTeamByGameId(anyLong())).thenReturn(Optional.of(awayTeamEntity));
+        when(teamRepository.findHomeTeamByGameId(anyLong())).thenReturn(Optional.of(homeTeamEntity));
 
         Game updatedGame = addNewBaseballPlayUseCase.createNewPlayAndScore(scoreRequest);
 
