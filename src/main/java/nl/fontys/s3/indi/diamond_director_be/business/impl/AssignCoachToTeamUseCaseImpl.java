@@ -1,5 +1,6 @@
 package nl.fontys.s3.indi.diamond_director_be.business.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.business.AssignCoachToTeamUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.NO_COACH_EXCEPTION;
@@ -20,6 +21,7 @@ public class AssignCoachToTeamUseCaseImpl implements AssignCoachToTeamUseCase {
     private final CoachRepository coachRepository;
 
     @Override
+    @Transactional
     public void assignCoachToTeam(AssignCoachTeamRequest request) {
         CoachEntity foundCoach = coachRepository.findById(request.getCoachId()).orElseThrow(NO_COACH_EXCEPTION::new);
         TeamEntity foundTeam = teamRepository.findByTeamName(request.getTeamName()).orElseThrow(NO_TEAM_FOUND_EXCEPTION::new);
