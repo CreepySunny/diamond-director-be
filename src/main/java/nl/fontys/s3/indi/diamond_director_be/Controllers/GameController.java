@@ -20,8 +20,12 @@ import java.util.List;
 @CrossOrigin(origins = "http://127.0.0.1:5173/")
 public class GameController {
     private final CreateGameUseCase createGameUseCase;
-    private final GameRepository gameRepository;
-    private final GetGamesByCoachIdUseCse getGamesByCoachIdUseCse;
+    private final GetGamesByCoachUserEmailUseCse getGamesByCoachUserEmailUseCse;
+    private final FindGameFromGameIdUseCase findGameFromGameIdUseCase;
+    private final GetAllPlayersFromGameIdUseCase getAllPlayersFromGameIdUseCase;
+    private final AddNewBaseballPlayUseCase addNewBaseballPlayUseCase;
+    private final SimpMessagingTemplate simpMessagingTemplate;
+    private final FindAllGameUseCase findAllGameUseCase;
 
     @PostMapping
     @RolesAllowed({"ADMIN", "COACH"})
