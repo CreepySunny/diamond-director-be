@@ -1,6 +1,5 @@
 package nl.fontys.s3.indi.diamond_director_be.business.impl;
 
-import lombok.AllArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.business.CalculatePitchingStatisticsUseCase;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Enums.PlayResult;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Play;
@@ -11,7 +10,6 @@ import java.util.List;
 
 
 @Service
-@AllArgsConstructor
 public class CalculatePitchingStatisticsUseCaseImpl implements CalculatePitchingStatisticsUseCase {
     private Integer atBats = 0;
     private Integer singles = 0;
