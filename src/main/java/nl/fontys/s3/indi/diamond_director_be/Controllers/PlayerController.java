@@ -5,7 +5,6 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.business.*;
 import nl.fontys.s3.indi.diamond_director_be.business.Converters.PlayConverter;
-import nl.fontys.s3.indi.diamond_director_be.business.Converters.PlayerConverter;
 import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.NO_PLAYER_EXCEPTION;
 import nl.fontys.s3.indi.diamond_director_be.business.impl.FindAllPlayersNoTeamUseCaseImpl;
 import nl.fontys.s3.indi.diamond_director_be.domain.Auth.CreateUserResponse;
@@ -35,6 +34,7 @@ public class PlayerController {
     private final CalculateBattingStatisticsUseCase calculateBattingStatisticsUseCase;
     private final FindPlayerByUserIdUseCase findPlayerByUserIdUseCase;
     private final GetPercentageBatterToPlayerPositionUseCase getPercentageBatterToPlayerPositionUseCase;
+    private final GetPercentagePitcherToPlayerPositionUseCase getPercentagePitcherToPlayerPositionUseCase;
 
     @PostMapping()
     public ResponseEntity<CreateUserResponse> createPlayer(@RequestBody @Valid CreatePlayerRequest request) throws ParseException {
@@ -91,8 +91,15 @@ public class PlayerController {
 
     @GetMapping("/{playerUserId}/{position}/batting")
     @RolesAllowed({"PLAYER"})
-    public ResponseEntity<PlayerPositionBatterStatisticsResponse> getFieldPositionSpecificCompletionAndStats(@PathVariable Long playerUserId, @PathVariable String position){
+    public ResponseEntity<PlayerPositionBatterStatisticsResponse> getFieldPositionSpecificCompletionAndStatsBatting(@PathVariable Long playerUserId, @PathVariable String position){
         PlayerPositionBatterStatisticsResponse response = getPercentageBatterToPlayerPositionUseCase.getPerPositionStats(playerUserId, PlayerPosition.valueOf(position));
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{playerUserId}/{position}/pitching")
+    @RolesAllowed({"PLAYER"})
+    public ResponseEntity<PlayerPositionPitcherStatisticsResponse> getFieldPositionSpecificCompletionAndStatsPitching(@PathVariable Long playerUserId, @PathVariable String position){
+        PlayerPositionPitcherStatisticsResponse response = getPercentagePitcherToPlayerPositionUseCase.getPercentageForPitcher(playerUserId, PlayerPosition.valueOf(position));
         return ResponseEntity.ok(response);
     }
 }
