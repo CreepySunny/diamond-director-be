@@ -74,7 +74,7 @@ public class PlayerController {
     @GetMapping("/{id}/batting")
     @RolesAllowed({"COACH", "PLAYER"})
     public ResponseEntity<BattingStatistics> getBattingStatsByPlayerId(@PathVariable Long id){
-        List<PlayEntity> foundPlays = playRepository.findByBatterId(findPlayerById(id).getId());
+        List<PlayEntity> foundPlays = playRepository.findByBatter(findPlayerById(id));
         List<Play> plays = foundPlays.stream().map(PlayConverter::convert).toList();
 
         BattingStatistics battingStatistics = calculateBattingStatisticsUseCase.calculateBatting(plays);
@@ -85,7 +85,7 @@ public class PlayerController {
     @GetMapping("/{id}/pitching")
     @RolesAllowed({"COACH", "PLAYER"})
     public ResponseEntity<BattingStatistics> getPitchingStatsByPlayerId(@PathVariable Long id){
-        List<PlayEntity> foundPlays = playRepository.findByBatterId(findPlayerById(id).getId());
+        List<PlayEntity> foundPlays = playRepository.findByPitcher(findPlayerById(id));
         List<Play> plays = foundPlays.stream().map(PlayConverter::convert).toList();
 
         BattingStatistics battingStatistics = calculateBattingStatisticsUseCase.calculateBatting(plays);
