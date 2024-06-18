@@ -43,6 +43,7 @@ public class PlayerController {
     }
 
     @GetMapping("{id}")
+    @RolesAllowed({"COACH", "PLAYER"})
     public ResponseEntity<Player> getPlayerById(@PathVariable Long id){
         Player foundPlayer;
         try {
