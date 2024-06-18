@@ -7,7 +7,8 @@ import nl.fontys.s3.indi.diamond_director_be.domain.Auth.UserRoles;
 import org.hibernate.validator.constraints.Length;
 
 @Table(name = "user_account")
-@Builder @AllArgsConstructor
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Data
