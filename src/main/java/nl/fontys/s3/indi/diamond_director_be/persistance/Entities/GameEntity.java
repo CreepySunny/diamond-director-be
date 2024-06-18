@@ -41,14 +41,14 @@ public class GameEntity {
     @Column(name = "outs")
     private int outs;
 
-    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<PlayEntity> plays;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "home_team_id")
     private TeamEntity homeTeam;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "away_team_id")
     private TeamEntity awayTeam;
 }
