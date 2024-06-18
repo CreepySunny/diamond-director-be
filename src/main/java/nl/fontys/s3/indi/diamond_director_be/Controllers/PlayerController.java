@@ -90,6 +90,6 @@ public class PlayerController {
     }
 
     private PlayerEntity findPlayerById(Long playerId){
-        return playerRepository.findById(playerId).orElseThrow(NO_PLAYER_EXCEPTION::new);
+        return playerRepository.findByUserEntityId(playerId).orElseThrow(NO_PLAYER_EXCEPTION::new);
     }
 }
