@@ -3,19 +3,14 @@ package nl.fontys.s3.indi.diamond_director_be.Controllers;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import nl.fontys.s3.indi.diamond_director_be.business.CalculateBattingStatisticsUseCase;
+import nl.fontys.s3.indi.diamond_director_be.business.*;
 import nl.fontys.s3.indi.diamond_director_be.business.Converters.PlayConverter;
 import nl.fontys.s3.indi.diamond_director_be.business.Converters.PlayerConverter;
-import nl.fontys.s3.indi.diamond_director_be.business.CreatePlayerUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.NO_PLAYER_EXCEPTION;
-import nl.fontys.s3.indi.diamond_director_be.business.FindAllPlayerFromTeamNameUseCase;
-import nl.fontys.s3.indi.diamond_director_be.business.FindPlayerByUserIdUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.impl.FindAllPlayersNoTeamUseCaseImpl;
 import nl.fontys.s3.indi.diamond_director_be.domain.Auth.CreateUserResponse;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Play;
-import nl.fontys.s3.indi.diamond_director_be.domain.Player.BattingStatistics;
-import nl.fontys.s3.indi.diamond_director_be.domain.Player.CreatePlayerRequest;
-import nl.fontys.s3.indi.diamond_director_be.domain.Player.Player;
+import nl.fontys.s3.indi.diamond_director_be.domain.Player.*;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.PlayEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.PlayerEntity;
 import nl.fontys.s3.indi.diamond_director_be.persistance.PlayRepository;
@@ -39,6 +34,7 @@ public class PlayerController {
     private CreatePlayerUseCase createPlayerUseCase;
     private final CalculateBattingStatisticsUseCase calculateBattingStatisticsUseCase;
     private final FindPlayerByUserIdUseCase findPlayerByUserIdUseCase;
+    private final GetPercentageBatterToPlayerPositionUseCase getPercentageBatterToPlayerPositionUseCase;
 
     @PostMapping()
     public ResponseEntity<CreateUserResponse> createPlayer(@RequestBody @Valid CreatePlayerRequest request) throws ParseException {
@@ -91,5 +87,12 @@ public class PlayerController {
 
     private PlayerEntity findPlayerById(Long playerId){
         return playerRepository.findByUserEntityId(playerId).orElseThrow(NO_PLAYER_EXCEPTION::new);
+    }
+
+    @GetMapping("/{playerUserId}/{position}/batting")
+    @RolesAllowed({"PLAYER"})
+    public ResponseEntity<PlayerPositionBatterStatisticsResponse> getFieldPositionSpecificCompletionAndStats(@PathVariable Long playerUserId, @PathVariable String position){
+        PlayerPositionBatterStatisticsResponse response = getPercentageBatterToPlayerPositionUseCase.getPerPositionStats(playerUserId, PlayerPosition.valueOf(position));
+        return ResponseEntity.ok(response);
     }
 }
