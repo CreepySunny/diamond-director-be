@@ -4,16 +4,18 @@ import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Game;
 import nl.fontys.s3.indi.diamond_director_be.persistance.Entities.GameEntity;
 
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 public final class GameConverter {
-    private GameConverter() {}
+    private GameConverter() {
+    }
 
     public static Game convert(GameEntity gameEntity) {
         return Game.builder()
                 .id(gameEntity.getId())
                 .season(gameEntity.getSeason())
                 .homeScore(gameEntity.getHomeScore())
+                .away(TeamConverter.convert(gameEntity.getAwayTeam()))
+                .home(TeamConverter.convert(gameEntity.getHomeTeam()))
                 .awayScore(gameEntity.getAwayScore())
                 .outs(gameEntity.getOuts())
                 .inning(gameEntity.getInning())
