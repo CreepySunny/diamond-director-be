@@ -72,6 +72,7 @@ public class PlayerController {
 
 
     @GetMapping("/{id}/batting")
+    @RolesAllowed({"COACH", "PLAYER"})
     public ResponseEntity<BattingStatistics> getBattingStatsByPlayerId(@PathVariable Long id){
         List<PlayEntity> foundPlays = playRepository.findByBatterId(findPlayerById(id).getId());
         List<Play> plays = foundPlays.stream().map(PlayConverter::convert).toList();
@@ -82,6 +83,7 @@ public class PlayerController {
     }
 
     @GetMapping("/{id}/pitching")
+    @RolesAllowed({"COACH", "PLAYER"})
     public ResponseEntity<BattingStatistics> getPitchingStatsByPlayerId(@PathVariable Long id){
         List<PlayEntity> foundPlays = playRepository.findByBatterId(findPlayerById(id).getId());
         List<Play> plays = foundPlays.stream().map(PlayConverter::convert).toList();
