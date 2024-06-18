@@ -42,7 +42,7 @@ class CreateTeamUseCaseImplTest {
     @BeforeEach
     void setUp() {
         createTeamRequest = new CreateTeamRequest();
-        createTeamRequest.setCreatingUserId(1L);
+        createTeamRequest.setCreateCoachUserEmail("coach@prime.com");
         createTeamRequest.setTeamName("New Team");
 
         coachEntity = new CoachEntity();
@@ -59,26 +59,26 @@ class CreateTeamUseCaseImplTest {
 
     @Test
     void createTeam_success() {
-        when(coachRepository.findByUserEntityId(anyLong())).thenReturn(Optional.of(coachEntity));
+        when(coachRepository.findByUserEntityEmail(anyString())).thenReturn(Optional.of(coachEntity));
         when(teamRepository.save(any(TeamEntity.class))).thenReturn(teamEntity);
 
         Long teamId = createTeamUseCase.createTeam(createTeamRequest);
 
         assertNotNull(teamId);
         assertEquals(1L, teamId);
-        verify(coachRepository, times(1)).findByUserEntityId(anyLong());
+        verify(coachRepository, times(1)).findByUserEntityEmail(anyString());
         verify(teamRepository, times(1)).save(any(TeamEntity.class));
     }
 
     @Test
     void createTeam_coachNotFound() {
-        when(coachRepository.findByUserEntityId(anyLong())).thenReturn(Optional.empty());
+        when(coachRepository.findByUserEntityEmail(anyString())).thenReturn(Optional.empty());
 
         assertThrows(NO_COACH_EXCEPTION.class, () -> {
             createTeamUseCase.createTeam(createTeamRequest);
         });
 
-        verify(coachRepository, times(1)).findByUserEntityId(anyLong());
+        verify(coachRepository, times(1)).findByUserEntityEmail(anyString());
         verify(teamRepository, times(0)).save(any(TeamEntity.class));
     }
 }
