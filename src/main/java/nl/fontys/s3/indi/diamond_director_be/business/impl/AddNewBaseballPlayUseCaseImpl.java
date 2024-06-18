@@ -4,10 +4,10 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.business.AddNewBaseballPlayUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.Converters.GameConverter;
-import nl.fontys.s3.indi.diamond_director_be.business.Converters.PlayFielderConverter;
 import nl.fontys.s3.indi.diamond_director_be.business.Converters.PlayerConverter;
 import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.NO_GAME_EXCEPTION;
 import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.NO_PLAYER_EXCEPTION;
+import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.NO_TEAM_FOUND_EXCEPTION;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Enums.Bases;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Enums.InningHalves;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Enums.PlayResult;
@@ -32,6 +32,8 @@ public class AddNewBaseballPlayUseCaseImpl implements AddNewBaseballPlayUseCase 
     private final PlayRepository playRepository;
     private final GameRepository gameRepository;
     private final PlayerRepository playerRepository;
+    private final TeamRepository teamRepository;
+    private final PlayFielderRepository playFielderRepository;
 
     @Override
     @Transactional
@@ -61,11 +63,14 @@ public class AddNewBaseballPlayUseCaseImpl implements AddNewBaseballPlayUseCase 
                 playFielderEntity.setPlay(savedPlay);
                 playFielderEntity.setFielder(fieldPosition);
                 playFielders.add(playFielderEntity);
+                playFielderRepository.save(playFielderEntity);
             }
             savedPlay.setFielders(playFielders);
         }
 
         GameEntity updatedGameEntity = GameConverter.convert(game);
+        updatedGameEntity.setAwayTeam(teamRepository.findAwayTeamByGameId(updatedGameEntity.getId()).orElseThrow(NO_TEAM_FOUND_EXCEPTION::new));
+        updatedGameEntity.setHomeTeam(teamRepository.findHomeTeamByGameId(updatedGameEntity.getId()).orElseThrow(NO_TEAM_FOUND_EXCEPTION::new));
         gameRepository.save(updatedGameEntity);
 
         return game;
