@@ -9,6 +9,7 @@ import nl.fontys.s3.indi.diamond_director_be.business.Converters.PlayerConverter
 import nl.fontys.s3.indi.diamond_director_be.business.CreatePlayerUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.NO_PLAYER_EXCEPTION;
 import nl.fontys.s3.indi.diamond_director_be.business.FindAllPlayerFromTeamNameUseCase;
+import nl.fontys.s3.indi.diamond_director_be.business.FindPlayerByUserIdUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.impl.FindAllPlayersNoTeamUseCaseImpl;
 import nl.fontys.s3.indi.diamond_director_be.domain.Auth.CreateUserResponse;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Play;
@@ -37,6 +38,7 @@ public class PlayerController {
     private final FindAllPlayerFromTeamNameUseCase findPlayersFromTeamName;
     private CreatePlayerUseCase createPlayerUseCase;
     private final CalculateBattingStatisticsUseCase calculateBattingStatisticsUseCase;
+    private final FindPlayerByUserIdUseCase findPlayerByUserIdUseCase;
 
     @PostMapping()
     public ResponseEntity<CreateUserResponse> createPlayer(@RequestBody @Valid CreatePlayerRequest request) throws ParseException {
@@ -47,13 +49,7 @@ public class PlayerController {
     @GetMapping("{id}")
     @RolesAllowed({"COACH", "PLAYER"})
     public ResponseEntity<Player> getPlayerById(@PathVariable Long id){
-        Player foundPlayer;
-        try {
-            foundPlayer = PlayerConverter.convert(playerRepository.findById(id).orElseThrow(NO_PLAYER_EXCEPTION::new));
-        }catch (NO_PLAYER_EXCEPTION ex){
-            return ResponseEntity.status(ex.getStatusCode()).build();
-        }
-
+        Player foundPlayer = findPlayerByUserIdUseCase.findPlayerByUserId(id);
         return ResponseEntity.ok(foundPlayer);
     }
 
