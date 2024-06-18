@@ -55,6 +55,20 @@ public class PlayerController {
         return ResponseEntity.ok(foundPlayer);
     }
 
+    @GetMapping("no-team")
+    @RolesAllowed({"COACH", "PLAYER"})
+    public ResponseEntity<List<Player>> getAllPlayerWithNoTeam(){
+        return ResponseEntity.ok(findAllPlayersNoTeamUseCaseImpl.findPlayersNoTeam());
+    }
+
+
+    @GetMapping("team/{teamName}")
+    @RolesAllowed({"COACH", "PLAYER"})
+    public ResponseEntity<List<Player>> getPlayersFromTeamName(@PathVariable @Valid String teamName){
+        return ResponseEntity.ok(findPlayersFromTeamName.findPlayersFromTeamName(teamName));
+    }
+
+
     @GetMapping("/{id}/batting")
     public ResponseEntity<BattingStatistics> getBattingStatsByPlayerId(@PathVariable Long id){
         List<PlayEntity> foundPlays = playRepository.findByBatterId(findPlayerById(id).getId());
