@@ -31,6 +31,8 @@ import java.util.Optional;
 public class PlayerController {
     private final PlayerRepository playerRepository;
     private final PlayRepository playRepository;
+    private final FindAllPlayersNoTeamUseCaseImpl findAllPlayersNoTeamUseCaseImpl;
+    private final FindAllPlayerFromTeamNameUseCase findPlayersFromTeamName;
     private CreatePlayerUseCase createPlayerUseCase;
     private final CalculateBattingStatisticsUseCase calculateBattingStatisticsUseCase;
 
