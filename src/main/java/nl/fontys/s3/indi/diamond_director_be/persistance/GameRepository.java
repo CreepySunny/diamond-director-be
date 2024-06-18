@@ -15,6 +15,6 @@ public interface GameRepository extends JpaRepository<GameEntity, Long> {
             "JOIN g.awayTeam a " +
             "JOIN a.coaches ac " +
             "JOIN ac.userEntity acu " +
-            "WHERE hcu.id = :userId OR acu.id = :userId")
-    List<GameEntity> findGamesByCoachId(@Param("userId") Long coachId);
+            "WHERE hcu.email = :userEmail OR acu.email = :userEmail")
+    List<GameEntity> findGamesByCoachUserEmail(@Param("userEmail") String userEmail);
 }
