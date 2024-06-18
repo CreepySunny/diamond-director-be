@@ -2,9 +2,9 @@ package nl.fontys.s3.indi.diamond_director_be.Controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import nl.fontys.s3.indi.diamond_director_be.business.UserLogInUseCase;
-import nl.fontys.s3.indi.diamond_director_be.domain.Auth.LogInRequest;
-import nl.fontys.s3.indi.diamond_director_be.domain.Auth.LogInResponse;
+import nl.fontys.s3.indi.diamond_director_be.Business.Authentication.UserLogInUseCase;
+import nl.fontys.s3.indi.diamond_director_be.Domain.Auth.LogInRequest;
+import nl.fontys.s3.indi.diamond_director_be.Domain.Auth.LogInResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
