@@ -24,6 +24,8 @@ public class TeamController {
     private final CreateTeamUseCase createTeamUseCase;
     private final FindTeamFromUserEmailUseCase findTeamFromUserEmailUseCase;
     private final AssignCoachToTeamUseCase assignCoachToTeamUseCase;
+    private final AssignPlayerToTeamUseCase assignPlayerToTeamUseCase;
+    private final FindAllTeamsUseCase findAllTeamsUseCase;
 
     @PostMapping
     @RolesAllowed({"COACH"})
