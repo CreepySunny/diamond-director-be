@@ -4,18 +4,17 @@ package nl.fontys.s3.indi.diamond_director_be.Controllers;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import nl.fontys.s3.indi.diamond_director_be.business.AssignCoachToTeamUseCase;
+import nl.fontys.s3.indi.diamond_director_be.business.AssignPlayerToTeamUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.CreateTeamUseCase;
+import nl.fontys.s3.indi.diamond_director_be.business.FindAllTeamsUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.FindTeamFromUserEmailUseCase;
-import nl.fontys.s3.indi.diamond_director_be.domain.Team.AssignCoachTeamRequest;
-import nl.fontys.s3.indi.diamond_director_be.domain.Team.CreateTeamRequest;
-import nl.fontys.s3.indi.diamond_director_be.domain.Team.FindTeamResponse;
-import nl.fontys.s3.indi.diamond_director_be.domain.Team.Team;
+import nl.fontys.s3.indi.diamond_director_be.domain.Team.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpStatusCodeException;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
