@@ -1,5 +1,6 @@
 package nl.fontys.s3.indi.diamond_director_be.Controllers;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import nl.fontys.s3.indi.diamond_director_be.business.CalculateBattingStatisticsUseCase;
@@ -7,6 +8,8 @@ import nl.fontys.s3.indi.diamond_director_be.business.Converters.PlayConverter;
 import nl.fontys.s3.indi.diamond_director_be.business.Converters.PlayerConverter;
 import nl.fontys.s3.indi.diamond_director_be.business.CreatePlayerUseCase;
 import nl.fontys.s3.indi.diamond_director_be.business.Exceptions.NO_PLAYER_EXCEPTION;
+import nl.fontys.s3.indi.diamond_director_be.business.FindAllPlayerFromTeamNameUseCase;
+import nl.fontys.s3.indi.diamond_director_be.business.impl.FindAllPlayersNoTeamUseCaseImpl;
 import nl.fontys.s3.indi.diamond_director_be.domain.Auth.CreateUserResponse;
 import nl.fontys.s3.indi.diamond_director_be.domain.GameState.Play;
 import nl.fontys.s3.indi.diamond_director_be.domain.Player.BattingStatistics;
@@ -22,7 +25,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
