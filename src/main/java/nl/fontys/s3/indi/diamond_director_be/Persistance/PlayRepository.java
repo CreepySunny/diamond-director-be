@@ -14,7 +14,6 @@ public interface PlayRepository extends JpaRepository<PlayEntity, Long> {
 
     List<PlayEntity> findByPitcher(PlayerEntity playerEntity);
 
-
     @Query("SELECT p FROM PlayEntity p JOIN p.fielders f WHERE p.batter = :batter AND f.fielder = :fielderPosition")
     List<PlayEntity> findPlaysByBatterAndFielderPosition(@Param("batter") PlayerEntity batter, @Param("fielderPosition") PlayerPosition fielderPosition);
 
