@@ -9,8 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface CoachRepository extends JpaRepository<CoachEntity, Long> {
-    Optional<CoachEntity> findByUserEntityId(Long id);
-
     Optional<CoachEntity> findByUserEntityEmail(String email);
 
     List<CoachEntity> findByTeamIsNull();
