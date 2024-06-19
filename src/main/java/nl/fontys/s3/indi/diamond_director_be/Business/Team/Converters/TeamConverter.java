@@ -31,6 +31,7 @@ public class TeamConverter {
 
     public static Team convert(TeamEntity teamEntity) {
         Team team = Team.builder()
+                .id(teamEntity.getTeamId())
                 .teamName(teamEntity.getTeamName())
                 .build();
         List<Coaches> coaches = teamEntity.getCoaches().stream()
