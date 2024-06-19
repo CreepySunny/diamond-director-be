@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Team {
+    private Long id;
     List<Coaches> coaches;
     List<Player> rooster;
     private String teamName;
