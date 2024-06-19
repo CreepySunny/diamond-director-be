@@ -69,7 +69,7 @@ public class TeamController {
     }
 
     @GetMapping("search/{teamName}")
-    public ResponseEntity<Team> searchForTeamUsingTeamName(@PathVariable String teamName){
+    public ResponseEntity<List<Team>> searchForTeamUsingTeamName(@PathVariable String teamName){
         return ResponseEntity.ok(searchForTeamUsingTeamNameUseCase.searchForTeam(teamName));
     }
 }

@@ -9,6 +9,8 @@ import nl.fontys.s3.indi.diamond_director_be.Domain.Team.Team;
 import nl.fontys.s3.indi.diamond_director_be.Persistance.TeamRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class SearchForTeamUsingTeamNameUseCaseImpl implements SearchForTeamUsingTeamNameUseCase {
@@ -16,7 +18,10 @@ public class SearchForTeamUsingTeamNameUseCaseImpl implements SearchForTeamUsing
 
     @Override
     @Transactional
-    public Team searchForTeam(String teamName) {
-        return TeamConverter.convert(teamRepository.findByTeamNameContainingIgnoreCase(teamName).orElseThrow(NO_COACH_EXCEPTION::new));
+    public List<Team> searchForTeam(String teamName) {
+        return teamRepository.findByTeamNameContainingIgnoreCase(teamName)
+                .stream()
+                .map(TeamConverter::convert)
+                .toList();
     }
 }
