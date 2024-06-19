@@ -41,7 +41,7 @@ class CreateCoachUseCaseImplTest {
     }
 
     @Test
-    public void testCreateCoach() {
+    void testCreateCoach() {
         // Given
         CreateCoachRequest request = CreateCoachRequest.builder()
                 .firstName("John")
@@ -87,7 +87,7 @@ class CreateCoachUseCaseImplTest {
     }
 
     @Test
-    public void testCreateCoachThrowDubEmailException() {
+    void testCreateCoachThrowDubEmailException() {
         // Given
         CreateCoachRequest request = CreateCoachRequest.builder()
                 .firstName("John")
@@ -126,6 +126,4 @@ class CreateCoachUseCaseImplTest {
         assertThrows(DUP_EMAIL_EXCEPTION.class, () -> createCoachUseCase.createCoach(request));
 
     }
-
-
 }

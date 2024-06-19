@@ -44,7 +44,7 @@ public class CreatePlayerUseCaseImplTest {
 
         @Test
         @Transactional
-        public void testCreate() {
+        void testCreate() {
 
             CreatePlayerRequest request = CreatePlayerRequest.builder()
                     .firstName("John")

@@ -34,7 +34,7 @@ import static org.mockito.Mockito.when;
         private CreateGameUseCaseImpl createGameUseCase;
 
     @Test
-    public void testCreateGame_Success() {
+    void testCreateGame_Success() {
         // Mock dependencies
         TeamEntity homeTeamEntity = TeamEntity.builder()
                 .teamName("HomeTeam")
@@ -65,7 +65,7 @@ import static org.mockito.Mockito.when;
     }
 
     @Test
-    public void testCreateGame_NoTeamFound() {
+    void testCreateGame_NoTeamFound() {
         when(teamRepository.findByTeamName(anyString())).thenReturn(Optional.empty());
 
         CreateGameRequest request = new CreateGameRequest("2024", "NonExistentTeam", "AwayTeam");
