@@ -31,10 +31,10 @@ public class WebSecurityConfig {
                 .sessionManagement(configurer ->
                         configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(registry ->
-                        registry.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()                 // CORS pre-flight requests should be public
-                                .requestMatchers(HttpMethod.POST, "/player", "/tokens", "/coach").permitAll() // Creating a student and login are public
-                                .requestMatchers(HttpMethod.GET, "/ws", "/game/games").permitAll()
-                                .anyRequest().authenticated()                                             // Everything else --> authentication required, which is Spring security's default behaviour
+                        registry.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/player", "/tokens", "/coach").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/ws", "/game/games", "/team/search/**").permitAll()
+                                .anyRequest().authenticated()
                 )
                 .exceptionHandling(configure -> configure.authenticationEntryPoint(authenticationEntryPoint))
                 .addFilterBefore(authenticationRequestFilter, UsernamePasswordAuthenticationFilter.class);
