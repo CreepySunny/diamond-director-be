@@ -26,7 +26,7 @@ public class CoachController {
     private final FindCoachesNoTeamUseCase findCoachesNoTeamUseCase;
 
     @PostMapping()
-    public ResponseEntity<CreateUserResponse> createPlayer(@RequestBody @Valid CreateCoachRequest request) {
+    public ResponseEntity<CreateUserResponse> createCoach(@RequestBody @Valid CreateCoachRequest request) {
         CreateUserResponse saved = createCoachUseCase.createCoach(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
