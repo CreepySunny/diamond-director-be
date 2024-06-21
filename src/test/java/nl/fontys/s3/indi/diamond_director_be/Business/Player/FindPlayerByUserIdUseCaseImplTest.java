@@ -3,6 +3,7 @@ package nl.fontys.s3.indi.diamond_director_be.Business.Player;
 import jakarta.transaction.Transactional;
 import nl.fontys.s3.indi.diamond_director_be.Business.Coach.Exceptions.NO_COACH_EXCEPTION;
 import nl.fontys.s3.indi.diamond_director_be.Business.Player.impl.FindPlayerByUserIdUseCaseImpl;
+import nl.fontys.s3.indi.diamond_director_be.Configuration.security.token.AccessToken;
 import nl.fontys.s3.indi.diamond_director_be.Domain.Player.Player;
 import nl.fontys.s3.indi.diamond_director_be.Domain.Player.PlayerHanded;
 import nl.fontys.s3.indi.diamond_director_be.Domain.Player.PlayerPosition;
@@ -25,6 +26,9 @@ public class FindPlayerByUserIdUseCaseImplTest {
     @Mock
     private PlayerRepository playerRepository;
 
+    @Mock
+    private AccessToken accessToken;
+
     @InjectMocks
     private FindPlayerByUserIdUseCaseImpl findPlayerByUserIdUseCase;
 
@@ -39,6 +43,7 @@ public class FindPlayerByUserIdUseCaseImplTest {
         Long userId = 1L;
         PlayerEntity mockPlayerEntity = createMockPlayerEntity(userId);
         when(playerRepository.findByUserEntityId(userId)).thenReturn(Optional.of(mockPlayerEntity));
+        when(accessToken.getUserId()).thenReturn(userId);
 
         Player player = findPlayerByUserIdUseCase.findPlayerByUserId(userId);
 
@@ -53,6 +58,7 @@ public class FindPlayerByUserIdUseCaseImplTest {
     void testFindPlayerByUserId_NoPlayerFound() {
         Long userId = 1L;
         when(playerRepository.findByUserEntityId(userId)).thenReturn(Optional.empty());
+        when(accessToken.getUserId()).thenReturn(userId);
 
         assertThrows(NO_COACH_EXCEPTION.class, () -> {
             findPlayerByUserIdUseCase.findPlayerByUserId(userId);
