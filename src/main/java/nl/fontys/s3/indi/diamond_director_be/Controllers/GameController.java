@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/game")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://127.0.0.1:5173/")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:4173"})
 public class GameController {
     private final CreateGameUseCase createGameUseCase;
     private final GetGamesByCoachUserEmailUseCase getGamesByCoachUserEmailUseCase;
