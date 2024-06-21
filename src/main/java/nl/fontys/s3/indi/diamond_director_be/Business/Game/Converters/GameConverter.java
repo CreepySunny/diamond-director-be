@@ -19,6 +19,7 @@ public final class GameConverter {
                 .home(TeamConverter.convert(gameEntity.getHomeTeam()))
                 .awayScore(gameEntity.getAwayScore())
                 .outs(gameEntity.getOuts())
+                .currentHalf(gameEntity.getHalves())
                 .inning(gameEntity.getInning())
                 .playsInAGame(gameEntity.getPlays().stream()
                         .map(PlayConverter::convert)

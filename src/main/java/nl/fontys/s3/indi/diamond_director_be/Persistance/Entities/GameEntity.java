@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import nl.fontys.s3.indi.diamond_director_be.Domain.GameState.Enums.InningHalves;
 
 import java.util.List;
 
@@ -40,6 +41,11 @@ public class GameEntity {
     @NotNull
     @Column(name = "outs")
     private int outs;
+
+    @NotNull
+    @Column(name = "half")
+    @Enumerated(EnumType.STRING)
+    private InningHalves halves;
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<PlayEntity> plays;
