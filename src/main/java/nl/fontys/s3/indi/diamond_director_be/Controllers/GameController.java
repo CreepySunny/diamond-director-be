@@ -20,7 +20,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://127.0.0.1:5173/")
 public class GameController {
     private final CreateGameUseCase createGameUseCase;
-    private final GetGamesByCoachUserEmailUseCse getGamesByCoachUserEmailUseCse;
+    private final GetGamesByCoachUserEmailUseCase getGamesByCoachUserEmailUseCase;
     private final FindGameFromGameIdUseCase findGameFromGameIdUseCase;
     private final GetAllPlayersFromGameIdUseCase getAllPlayersFromGameIdUseCase;
     private final AddNewBaseballPlayUseCase addNewBaseballPlayUseCase;
@@ -73,7 +73,7 @@ public class GameController {
     @RolesAllowed({"ADMIN", "COACH"})
     public ResponseEntity<List<GameResponse>> getAllGamesByCoachEmail(@PathVariable String email) {
 
-        List<GameResponse> responses = getGamesByCoachUserEmailUseCse.findGamesByCoachUserEmail(email);
+        List<GameResponse> responses = getGamesByCoachUserEmailUseCase.findGamesByCoachUserEmail(email);
 
         return ResponseEntity.ok(responses);
     }

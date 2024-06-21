@@ -1,6 +1,6 @@
 package nl.fontys.s3.indi.diamond_director_be.Business.Game;
 
-import nl.fontys.s3.indi.diamond_director_be.Business.Game.impl.GetGamesByCoachUserEmailUseCseImpl;
+import nl.fontys.s3.indi.diamond_director_be.Business.Game.impl.GetGamesByCoachUserEmailUseCaseImpl;
 import nl.fontys.s3.indi.diamond_director_be.Domain.GameState.GameResponse;
 import nl.fontys.s3.indi.diamond_director_be.Persistance.Entities.GameEntity;
 import nl.fontys.s3.indi.diamond_director_be.Persistance.Entities.TeamEntity;
@@ -20,13 +20,13 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class GetGamesByCoachUserEmailUseCseImplTest {
+class GetGamesByCoachUserEmailUseCaseImplTest {
 
     @Mock
     private GameRepository gameRepository;
 
     @InjectMocks
-    private GetGamesByCoachUserEmailUseCseImpl getGamesByCoachIdUseCse;
+    private GetGamesByCoachUserEmailUseCaseImpl getGamesByCoachIdUseCse;
 
     private GameEntity gameEntity;
     private List<GameEntity> gameEntities;

@@ -4,6 +4,6 @@ import nl.fontys.s3.indi.diamond_director_be.Domain.GameState.GameResponse;
 
 import java.util.List;
 
-public interface GetGamesByCoachUserEmailUseCse {
+public interface GetGamesByCoachUserEmailUseCase {
     List<GameResponse> findGamesByCoachUserEmail(String coachId);
 }
