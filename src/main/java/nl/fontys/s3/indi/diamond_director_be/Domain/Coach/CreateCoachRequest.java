@@ -17,12 +17,12 @@ import java.time.LocalDate;
 @EqualsAndHashCode(callSuper = true)
 public class CreateCoachRequest extends CreateUserRequest {
 
-    @NotNull
+    @NotNull(message = "Dob Cannot be empty!")
     private LocalDate dateOfBirth;
 
-    @NotNull
+    @NotNull(message = "Coach Position cannot be empty!")
     private CoachPosition position;
 
-    @NotNull
+    @NotNull(message = "Can score permission cannot be empty!")
     private Boolean canScoreKeep;
 }

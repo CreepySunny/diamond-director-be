@@ -11,16 +11,16 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateUserRequest {
-    @NotBlank
+    @NotBlank(message = "Firstname cannot be blank")
     private String firstName;
 
-    @NotBlank
+    @NotBlank(message = "Lastname cannot be blank")
     private String lastName;
 
-    @NotBlank
+    @NotBlank(message = "Email cannot be blank")
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "Password cannot be blank")
     private String password;
 
     private UserRoles role;
