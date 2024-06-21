@@ -34,6 +34,7 @@ public final class GameConverter {
                 .season(game.getSeason())
                 .homeScore(game.getHomeScore())
                 .awayScore(game.getAwayScore())
+                .halves(game.getCurrentHalf())
                 .outs(game.getOuts())
                 .inning(game.getInning())
                 .build();
