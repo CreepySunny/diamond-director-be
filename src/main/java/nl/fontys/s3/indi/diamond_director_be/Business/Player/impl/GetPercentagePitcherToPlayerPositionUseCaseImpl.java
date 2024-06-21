@@ -2,6 +2,7 @@ package nl.fontys.s3.indi.diamond_director_be.Business.Player.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import nl.fontys.s3.indi.diamond_director_be.Business.Player.CalculatePitcherStatisticsFromPlays;
 import nl.fontys.s3.indi.diamond_director_be.Business.Player.CalculatePitchingStatisticsUseCase;
 import nl.fontys.s3.indi.diamond_director_be.Business.Game.Converters.PlayConverter;
 import nl.fontys.s3.indi.diamond_director_be.Business.Player.Exceptions.NO_PLAYER_EXCEPTION;
@@ -20,7 +21,7 @@ import java.util.List;
 public class GetPercentagePitcherToPlayerPositionUseCaseImpl implements GetPercentagePitcherToPlayerPositionUseCase {
     private final PlayRepository playRepository;
     private final PlayerRepository playerRepository;
-    private final CalculatePitchingStatisticsUseCase calculatePitchingStatisticsUseCase;
+    private final CalculatePitcherStatisticsFromPlays calculatePitchingStatistics;
 
 
     @Override
@@ -36,7 +37,7 @@ public class GetPercentagePitcherToPlayerPositionUseCaseImpl implements GetPerce
                 .map(PlayConverter::convert)
                 .toList();
 
-        PitchingStatistics pitchingStatistics = calculatePitchingStatisticsUseCase.calculatePitchingStatistics(playsPerFieldPositionAndPitcher);
+        PitchingStatistics pitchingStatistics = calculatePitchingStatistics.calculatePitching(playsPerFieldPositionAndPitcher);
 
         return PlayerPositionPitcherStatisticsResponse.builder()
                 .percentageToPlayerPosition((double)((countPerFieldPositionPerPitcher/countAllPlaysPerPitcher)*100))

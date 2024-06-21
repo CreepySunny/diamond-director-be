@@ -1,16 +1,25 @@
 package nl.fontys.s3.indi.diamond_director_be.Business.Player.impl;
 
+import nl.fontys.s3.indi.diamond_director_be.Business.Game.Converters.PlayConverter;
+import nl.fontys.s3.indi.diamond_director_be.Business.Player.CalculatePitcherStatisticsFromPlays;
 import nl.fontys.s3.indi.diamond_director_be.Business.Player.CalculatePitchingStatisticsUseCase;
+import nl.fontys.s3.indi.diamond_director_be.Business.Player.Converter.PlayerConverter;
+import nl.fontys.s3.indi.diamond_director_be.Business.Player.Exceptions.NO_PLAYER_EXCEPTION;
 import nl.fontys.s3.indi.diamond_director_be.Domain.GameState.Enums.PlayResult;
 import nl.fontys.s3.indi.diamond_director_be.Domain.GameState.Play;
 import nl.fontys.s3.indi.diamond_director_be.Domain.Player.PitchingStatistics;
+import nl.fontys.s3.indi.diamond_director_be.Persistance.Entities.PlayerEntity;
+import nl.fontys.s3.indi.diamond_director_be.Persistance.PlayRepository;
+import nl.fontys.s3.indi.diamond_director_be.Persistance.PlayerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 
 @Service
-public class CalculatePitchingStatisticsUseCaseImpl implements CalculatePitchingStatisticsUseCase {
+public class CalculatePitchingStatisticsUseCaseImpl implements CalculatePitchingStatisticsUseCase, CalculatePitcherStatisticsFromPlays {
+    private final PlayerRepository playerRepository;
+    private final PlayRepository playRepository;
     private Integer atBats = 0;
     private Integer singles = 0;
     private Integer doubles = 0;
@@ -23,9 +32,23 @@ public class CalculatePitchingStatisticsUseCaseImpl implements CalculatePitching
     private Integer sacFly = 0;
     private Integer strikeOuts = 0;
 
-    @Override
-    public PitchingStatistics calculatePitchingStatistics(List<Play> plays) {
+    public CalculatePitchingStatisticsUseCaseImpl(PlayerRepository playerRepository, PlayRepository playRepository) {
+        this.playerRepository = playerRepository;
+        this.playRepository = playRepository;
+    }
 
+    @Override
+    public PitchingStatistics calculatePitchingStatistics(Long pitcherId) {
+        PlayerEntity foundPitcher = playerRepository.findById(pitcherId).orElseThrow(NO_PLAYER_EXCEPTION::new);
+
+        List<Play> plays = playRepository.findByPitcher(foundPitcher).stream()
+                .map(PlayConverter::convert)
+                .toList();
+        return calculatePitchingFromListOfPlays(plays);
+    }
+
+
+    private PitchingStatistics calculatePitchingFromListOfPlays(List<Play> plays) {
         for (Play play : plays){
             countStats(play.getPlayResult());
         }
@@ -53,7 +76,6 @@ public class CalculatePitchingStatisticsUseCaseImpl implements CalculatePitching
                 .hr9(hr9)
                 .build();
     }
-
 
     private void countStats(PlayResult playResult){
         switch (playResult) {
@@ -97,5 +119,10 @@ public class CalculatePitchingStatisticsUseCaseImpl implements CalculatePitching
                 break;
         }
 
+    }
+
+    @Override
+    public PitchingStatistics calculatePitching(List<Play> plays) {
+        return calculatePitchingFromListOfPlays(plays);
     }
 }

@@ -26,12 +26,11 @@ import java.util.List;
 @RequestMapping("/player")
 @CrossOrigin(origins = "http://127.0.0.1:5173/")
 public class PlayerController {
-    private final PlayerRepository playerRepository;
-    private final PlayRepository playRepository;
-    private final FindAllPlayersNoTeamUseCaseImpl findAllPlayersNoTeamUseCaseImpl;
+    private final FindAllPlayersNoTeamUseCase findAllPlayersNoTeamUseCaseImpl;
     private final FindAllPlayerFromTeamNameUseCase findPlayersFromTeamName;
-    private CreatePlayerUseCase createPlayerUseCase;
+    private final CreatePlayerUseCase createPlayerUseCase;
     private final CalculateBattingStatisticsUseCase calculateBattingStatisticsUseCase;
+    private final CalculatePitchingStatisticsUseCase calculatePitchingStatisticsUseCase;
     private final FindPlayerByUserIdUseCase findPlayerByUserIdUseCase;
     private final GetPercentageBatterToPlayerPositionUseCase getPercentageBatterToPlayerPositionUseCase;
     private final GetPercentagePitcherToPlayerPositionUseCase getPercentagePitcherToPlayerPositionUseCase;
@@ -66,11 +65,9 @@ public class PlayerController {
 
     @GetMapping("/{id}/batting")
     @RolesAllowed({"COACH", "PLAYER"})
-    public ResponseEntity<BattingStatistics> getBattingStatsByPlayerId(@PathVariable Long id){
-        List<PlayEntity> foundPlays = playRepository.findByBatter(findPlayerById(id));
-        List<Play> plays = foundPlays.stream().map(PlayConverter::convert).toList();
+    public ResponseEntity<PitchingStatistics> getBattingStatsByPlayerId(@PathVariable Long id){
 
-        BattingStatistics battingStatistics = calculateBattingStatisticsUseCase.calculateBatting(plays);
+        PitchingStatistics battingStatistics = calculatePitchingStatisticsUseCase.calculatePitchingStatistics(id);
 
         return ResponseEntity.ok(battingStatistics);
     }
@@ -78,16 +75,10 @@ public class PlayerController {
     @GetMapping("/{id}/pitching")
     @RolesAllowed({"COACH", "PLAYER"})
     public ResponseEntity<BattingStatistics> getPitchingStatsByPlayerId(@PathVariable Long id){
-        List<PlayEntity> foundPlays = playRepository.findByPitcher(findPlayerById(id));
-        List<Play> plays = foundPlays.stream().map(PlayConverter::convert).toList();
 
-        BattingStatistics battingStatistics = calculateBattingStatisticsUseCase.calculateBatting(plays);
+        BattingStatistics battingStatistics = calculateBattingStatisticsUseCase.calculateBatting(id);
 
         return ResponseEntity.ok(battingStatistics);
-    }
-
-    private PlayerEntity findPlayerById(Long playerId){
-        return playerRepository.findByUserEntityId(playerId).orElseThrow(NO_PLAYER_EXCEPTION::new);
     }
 
     @GetMapping("/{playerUserId}/{position}/batting")

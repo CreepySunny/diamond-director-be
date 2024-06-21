@@ -2,6 +2,7 @@ package nl.fontys.s3.indi.diamond_director_be.Business.Player.impl;
 
 
 import lombok.AllArgsConstructor;
+import nl.fontys.s3.indi.diamond_director_be.Business.Player.CalculateBatterStatisticsFromPlays;
 import nl.fontys.s3.indi.diamond_director_be.Business.Player.CalculateBattingStatisticsUseCase;
 import nl.fontys.s3.indi.diamond_director_be.Business.Game.Converters.PlayConverter;
 import nl.fontys.s3.indi.diamond_director_be.Business.Player.Exceptions.NO_PLAYER_EXCEPTION;
@@ -23,7 +24,7 @@ import java.util.List;
 public class GetPercentageBatterToPlayerPositionUseCaseImpl implements GetPercentageBatterToPlayerPositionUseCase {
     private final PlayRepository playRepository;
     private final PlayerRepository playerRepository;
-    private final CalculateBattingStatisticsUseCase calculateBattingStatisticsUseCase;
+    private final CalculateBatterStatisticsFromPlays calculateBatterStatisticsFromPlays;
 
 
     @Override
@@ -37,7 +38,7 @@ public class GetPercentageBatterToPlayerPositionUseCaseImpl implements GetPercen
                 .map(PlayConverter::convert)
                 .toList();
 
-        BattingStatistics battingStatistics = calculateBattingStatisticsUseCase.calculateBatting(playsPerPositionAndBatter);
+        BattingStatistics battingStatistics = calculateBatterStatisticsFromPlays.calculateBatterStatistics(playsPerPositionAndBatter);
 
 
         return PlayerPositionBatterStatisticsResponse.builder()

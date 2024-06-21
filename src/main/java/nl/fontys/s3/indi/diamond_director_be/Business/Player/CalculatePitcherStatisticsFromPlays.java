@@ -5,6 +5,6 @@ import nl.fontys.s3.indi.diamond_director_be.Domain.Player.PitchingStatistics;
 
 import java.util.List;
 
-public interface CalculatePitchingStatisticsUseCase {
-    PitchingStatistics calculatePitchingStatistics(Long pitcherId);
+public interface CalculatePitcherStatisticsFromPlays {
+    PitchingStatistics calculatePitching(List<Play> plays);
 }

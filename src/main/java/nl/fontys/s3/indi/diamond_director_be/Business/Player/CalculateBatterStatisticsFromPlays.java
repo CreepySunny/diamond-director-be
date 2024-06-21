@@ -5,6 +5,6 @@ import nl.fontys.s3.indi.diamond_director_be.Domain.Player.BattingStatistics;
 
 import java.util.List;
 
-public interface CalculateBattingStatisticsUseCase {
-    BattingStatistics calculateBatting(Long batterId);
+public interface CalculateBatterStatisticsFromPlays {
+    BattingStatistics calculateBatterStatistics(List<Play> play);
 }
