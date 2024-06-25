@@ -4,8 +4,6 @@ import nl.fontys.s3.indi.diamond_director_be.Business.Coach.CreateCoachUseCase;
 import nl.fontys.s3.indi.diamond_director_be.Business.Coach.FindCoachesFromTeamNameUseCase;
 import nl.fontys.s3.indi.diamond_director_be.Business.Coach.FindCoachesNoTeamUseCase;
 import nl.fontys.s3.indi.diamond_director_be.Domain.Auth.CreateUserResponse;
-import nl.fontys.s3.indi.diamond_director_be.Domain.Auth.UserRoles;
-import nl.fontys.s3.indi.diamond_director_be.Domain.Coach.CoachPosition;
 import nl.fontys.s3.indi.diamond_director_be.Domain.Coach.Coaches;
 import nl.fontys.s3.indi.diamond_director_be.Domain.Coach.CreateCoachRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,9 +18,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -89,13 +85,5 @@ public class CoachControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isArray());
 
         verify(findCoachesNoTeamUseCase, times(1)).findCoachesWithNoTeam();
-    }
-
-    private static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }
