@@ -6,5 +6,5 @@ import nl.fontys.s3.indi.diamond_director_be.Domain.Player.CreatePlayerRequest;
 import java.text.ParseException;
 
 public interface CreatePlayerUseCase {
-    CreateUserResponse create(CreatePlayerRequest request) throws ParseException;
+    CreateUserResponse create(CreatePlayerRequest request);
 }
