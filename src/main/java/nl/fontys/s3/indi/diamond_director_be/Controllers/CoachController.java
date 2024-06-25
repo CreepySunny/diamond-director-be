@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/coach")
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:4173", "http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:4173", "http://localhost:3000", "http://diamond-director-fe", "http://localhost", "http://diamond-director-fe:3000"})
 public class CoachController {
     private final CreateCoachUseCase createCoachUseCase;
     private final FindCoachesFromTeamNameUseCase findCoachesFromTeamNameUseCase;

@@ -46,7 +46,8 @@ public class WebSecurityConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:5173", "http://localhost:4173", "http://localhost:3000");
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:5173", "http://localhost:4173", "http://localhost:3000", "http://diamond-director-fe", "http://localhost", "http://diamond-director-fe:3000");
             }
         };
     }
