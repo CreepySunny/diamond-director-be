@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:4173"})
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:4173", "http://localhost:3000"})
 @RequestMapping("/team")
 public class TeamController {
     private final CreateTeamUseCase createTeamUseCase;
